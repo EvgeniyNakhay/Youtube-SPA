@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Youtube-SPA/static/css/main.a8083501.css",
+    "main.js": "/Youtube-SPA/static/js/main.a83c748b.js",
+    "index.html": "/Youtube-SPA/index.html",
+    "static/media/logo.svg": "/Youtube-SPA/static/media/logo.3c6e91accb5f7098214c71486649c3c6.svg",
+    "main.a8083501.css.map": "/Youtube-SPA/static/css/main.a8083501.css.map",
+    "main.a83c748b.js.map": "/Youtube-SPA/static/js/main.a83c748b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a8083501.css",
+    "static/js/main.a83c748b.js"
+  ]
+}

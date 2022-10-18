@@ -1,25 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import Authorization from './pages/Authorization/Authorization';
+import MainPage from './pages/MainPage/MainPage';
+import Favourites from './pages/Favourites/Favourites';
+import SearchResults from './pages/SearchResults/SearchResults';
+import { Routes,Route} from 'react-router-dom';
+import  PrivateRoute  from './hoc/index';
 
-function App() {
+const App = () => {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // <SearchResults/>
+    <Routes>
+      <Route path='/*' element={<MainPage/>}/>
+      <Route path='/results' element={<SearchResults/>}/>
+      <Route path='/favourite' element={<Favourites/>}/>
+      <Route path='/login' element={<Authorization/>}/> 
+    </Routes>  
   );
-}
+  
+};
 
 export default App;

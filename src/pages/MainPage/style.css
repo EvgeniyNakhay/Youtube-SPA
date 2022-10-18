@@ -1,0 +1,9 @@
+.logo{
+    height: 48px;
+    width: 48px
+}
+
+.submenu{
+    display: flex;
+    align-items: center;
+}

@@ -1,0 +1,17 @@
+.main-label{
+    text-align: center;
+}
+
+.login-form-item{
+    width: 100%;
+}
+
+.login-form-button {
+    width: 100%;
+}
+
+.site-layout-content {
+    min-height: 280px;
+    padding: 50px 88px 60px 88px;
+    background: #fff;
+}

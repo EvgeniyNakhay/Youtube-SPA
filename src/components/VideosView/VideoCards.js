@@ -14,19 +14,18 @@ const style = {
 const CustomCard = () => (
   <Link to='/'>
     <Card
-      hoverable
+      hoverable ="true"
       style={{
         width: '100%',
       }}
-      cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" style={{height:'202px'}}/>}
+      cover={<img alt='title' src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" style={{height:'180px', width:'100%'}}/>}
     >
       <Meta title="Europe Street beat" description="www.instagram.com" />
     </Card>
   </Link>
 );
 
-const VideoCards = () => (
-  <>
+const VideoCards = (videos) => (
     <Row gutter={[16, 24]}>
       <Col className="gutter-row" span={6}>
         <CustomCard/>
@@ -65,7 +64,6 @@ const VideoCards = () => (
         <CustomCard/>
       </Col>
     </Row>
-  </>
 );
 
 export default VideoCards;

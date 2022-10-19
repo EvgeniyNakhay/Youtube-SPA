@@ -9,12 +9,30 @@ import  PrivateRoute  from './hoc/index';
 const App = () => {
 
   return (
-    // <SearchResults/>
     <Routes>
-      <Route path='/*' element={<MainPage/>}/>
-      <Route path='/results' element={<SearchResults/>}/>
-      <Route path='/favourite' element={<Favourites/>}/>
       <Route path='/login' element={<Authorization/>}/> 
+      <Route 
+        path='/'
+        element={
+          <PrivateRoute>
+            <MainPage/>
+          </PrivateRoute>
+        }
+      />
+      <Route 
+        path='/favourite' 
+        element={
+          <PrivateRoute>
+            <Favourites/>
+          </PrivateRoute>
+        }
+      />
+      <Route 
+        path="/search/:searchTerm" 
+        element={
+            <SearchResults/>
+        }
+      />
     </Routes>  
   );
   

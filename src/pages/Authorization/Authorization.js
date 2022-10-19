@@ -2,9 +2,12 @@ import { Button, Layout, Form, Input } from 'antd';
 import logo from './auth-img/logo.svg'
 import React, {useState} from 'react';
 import './style.css'
+import { useNavigate } from 'react-router-dom';
 const { Content } = Layout;
 
 const Authorization = () => {
+
+  let navigate = useNavigate();
 
   const onFinish = (values) => {
     console.log('Success:', values);
@@ -33,6 +36,7 @@ const Authorization = () => {
         })
       })
     const data = await res.json();
+    navigate(`/`)
     localStorage.getItem('token', data.token)
   }
 

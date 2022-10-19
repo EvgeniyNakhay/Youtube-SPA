@@ -1,19 +1,34 @@
-import {Layout, Input, Segmented, Button, Modal, Form, Select, Col, Row, Slider, InputNumber } from 'antd';
-import React, {useState} from 'react';
+import {Layout, Input, Segmented, Button, Modal, Form, Select, Col, Row, Slider, InputNumber, List } from 'antd';
+import React, {useState, useEffect} from 'react';
 import {HeartOutlined, AppstoreOutlined, BarsOutlined} from '@ant-design/icons';
 import './style.css';
 import MainHeader from '../../components/MainHeader/MainHeader';
 import VideoList from '../../components/VideosView/VideoList';
 import VideoCards from '../../components/VideosView/VideoCards';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 const { Option } = Select;
 const { Content} = Layout;
 const { Search } = Input;
-const onSearch = (value) => console.log(value);
+// const onSearch = (value) => console.log(value);
 
 const SearchResults = () => {
   const [list, setList] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = Form.useForm();
+
+  const [videos, setVideos] = useState([])
+  const {searchTerm} = useParams();
+
+  const src = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=${searchTerm}&key=AIzaSyDuSa_snfrqupxMfqRmOU_NaH7utQtq988`
+  
+  useEffect(()=>{
+    axios
+      .get(src)
+        .then((data)=>setVideos(data.data.items))
+  },[])
+
+  console.log(searchTerm)
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -87,6 +102,7 @@ const SearchResults = () => {
         <>
             <Content 
               style={{
+                height:'100vh',
                 paddingInline: '200px',
               }}
             >
@@ -101,10 +117,13 @@ const SearchResults = () => {
                   </h1>
                   <Search
                     placeholder="Что хотите посмотреть?"
+                    defaultValue={searchTerm}
                     enterButton="Найти"
                     size="large"
                     suffix={suffix}
-                    onSearch={onSearch}
+                    // value = {inputValue}
+                    // onChange={(e) => setInputValue(e.target.value)}
+                    // onSearch={() => handleSearch()}
                   />
                 </Content> 
                 <Content 
@@ -113,14 +132,16 @@ const SearchResults = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
+                    marginBottom: '20px'
                   }}
                 >
                   <p
                     style={{
                       marginBottom: 0,
+                      display: 'flex'
                     }}
                   >
-                    Видео по запросу
+                    Видео по запросу <p style={{fontWeight:'bold', marginLeft:'5px', marginBottom:0}}>"{searchTerm}"</p>
                   </p>
                   <Segmented
                     onChange={() => setList(!list)}
@@ -136,10 +157,11 @@ const SearchResults = () => {
                     ]}
                   />
                 </Content>
+                
                   {list ?
-                    <VideoList/> 
+                    <VideoList searchTerm={searchTerm}/> 
                     : 
-                    <VideoCards/>
+                    <VideoCards searchTerm={searchTerm}/>
                   }
             </Content>
               

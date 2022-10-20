@@ -9,22 +9,11 @@ const { Search } = Input;
 
 const MainInput = () => {
 
-  const [searchTerm, setSearchTerm] = useState('')
-  const [videos, setVideos] = useState([])
-
-  const src = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=${searchTerm}&key=AIzaSyDuSa_snfrqupxMfqRmOU_NaH7utQtq988`
-  
-  useEffect(()=>{
-    axios
-      .get(src)
-        .then((data)=>setVideos(data.data.items))
-  },[])
-
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState('')
 
   const handleSearch = () => {   
     searchTerm && navigate(`/search/${searchTerm}`)
-    setSearchTerm('')
   }
 
   return (
@@ -57,7 +46,7 @@ const MainInput = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
               value={searchTerm}
               size="large"
-              onSearch={(e) => handleSearch(e)}
+              onSearch={handleSearch}
             />
           </Content>
         </Col>

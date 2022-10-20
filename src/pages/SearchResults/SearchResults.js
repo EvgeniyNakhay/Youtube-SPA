@@ -28,8 +28,6 @@ const SearchResults = () => {
         .then((data)=>setVideos(data.data.items))
   },[])
 
-  console.log(searchTerm)
-
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -102,7 +100,7 @@ const SearchResults = () => {
         <>
             <Content 
               style={{
-                height:'100vh',
+                height: '100%',
                 paddingInline: '200px',
               }}
             >
@@ -141,7 +139,7 @@ const SearchResults = () => {
                       display: 'flex'
                     }}
                   >
-                    Видео по запросу <p style={{fontWeight:'bold', marginLeft:'5px', marginBottom:0}}>"{searchTerm}"</p>
+                    Видео по запросу <span style={{fontWeight:'bold', marginLeft:'5px', marginBottom:0}}>"{searchTerm}"</span>
                   </p>
                   <Segmented
                     onChange={() => setList(!list)}
@@ -159,9 +157,9 @@ const SearchResults = () => {
                 </Content>
                 
                   {list ?
-                    <VideoList searchTerm={searchTerm}/> 
+                    <VideoList videos={videos}/> 
                     : 
-                    <VideoCards searchTerm={searchTerm}/>
+                    <VideoCards videos={videos}/>
                   }
             </Content>
               
@@ -190,7 +188,7 @@ const SearchResults = () => {
       }}
     >
       <Form.Item label="Запрос">
-        <Input placeholder="input placeholder" disabled />
+        <Input placeholder={searchTerm} disabled />
       </Form.Item>
       <Form.Item name='name' label="Название" rules={[{ required: true }]}>
         <Input placeholder="Укажите название" />

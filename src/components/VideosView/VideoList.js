@@ -6,14 +6,15 @@ import axios from 'axios';
 
 
 const VideoList = ({videos}) => {
-  
+  console.log(videos)
   return (
     <List
-      hoverable
+      hoverable = 'true'
       itemLayout="horizontal"
       dataSource={videos}
-      renderItem={(item) => (
-        <List.Item 
+      renderItem={(item, index) => (            // Проверить, корректно ли работает index в качестве ключа
+        <List.Item
+          key={index} 
           style={{
             padding:'0',
             margin:'16px 0'
@@ -25,18 +26,29 @@ const VideoList = ({videos}) => {
             }}
             extra={
               <img
-                width={157}
-                height={88}
-                alt="logo"
-                src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                width= '157px'
+                height= '88px'
+                alt={item.snippet?.title}
+                src={item.snippet?.thumbnails?.high?.url}
               />
             }
           />
-          <List.Item.Meta
-            style={{marginLeft:'20px'}}
-            title={item.title}
-            description="Ant Design, a design language for background applications, is refined by Ant UED Team"             
-          />
+            <List.Item.Meta
+              style={{
+                marginLeft:'20px',
+                fontWeight:'bold',
+              }}
+              title={item.snippet?.title.slice(0, 60)}
+              description={item.snippet?.channelId}             
+            />
+            {item.channelDetail?.statistics?.subscriberCount && (
+              <List.Item.Meta
+                style={{
+                  marginLeft:'20px',
+                }}
+                title={`${parseInt(item.channelDetail?.statistics?.subscriberCount).toLocaleString()} подписчиков`}
+              />
+            )}
         </List.Item>
       )}
     />

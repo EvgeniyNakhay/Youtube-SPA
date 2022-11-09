@@ -3,54 +3,44 @@ import React, {useState} from 'react';
 import {Navigate, NavLink} from 'react-router-dom';
 import './style.css';
 import MainHeader from '../../components/MainHeader/MainHeader';
+import {useDispatch, useSelector} from "react-redux";
 const { Content} = Layout;
 
-const data = [
-    'Racing car sprays burning fuel into crowd.',
-    'Japanese princess to wed commoner.',
-    'Australian walks 100km after outback crash.',
-    'Man charged over missing wedding girl.',
-    'Los Angeles battles huge wildfires.',
-];
-
-const Favourites = () => (
-  <>
+const Favourites = () => {
+  const favRequest = useSelector((store) => store.favRequest);
+  return <>
   {/* <Navigate replace to="/authorization" /> */}
     <Layout style={{height: '100vh'}}>
-        <MainHeader/>
+      <MainHeader/>
         <>
-            <Content 
+          <Content 
+            style={{
+              height: '100vh',
+              paddingInline: '200px',
+            }}
+          >
+          <Content>
+            <h1 
               style={{
-                height: '100vh',
-                paddingInline: '200px',
+                fontSize: '36px',
+                marginTop: '40px',
               }}
-            >
-                <Content>
-                  <h1 
-                    style={{
-                        fontSize: '36px',
-                        marginTop: '40px',
-                    }}
-                  > 
-                    Избранное 
-                  </h1>
-                </Content> 
-                <Content>
-                    <List 
-                        style={{
-                            background: '#FFF'
-                        }}
-                        size="large"
-                        dataSource={data}
-                        renderItem={(item) => <List.Item style={{fontWeight: 'bold'}}>{item}</List.Item>}
-                    />
-                </Content>
-                
-            </Content>
-              
-        </>   
+            > 
+              Избранное 
+            </h1>
+          </Content> 
+            <List 
+              style={{
+                background: '#FFF'
+              }}
+              size="large"
+              dataSource={favRequest}
+              renderItem={(item) => <List.Item><a href="https://ant.design" style={{fontWeight: 500, color: '#000000'}}>{item.title}</a></List.Item>}
+            />
+        </Content>
+      </>   
     </Layout>
   </>
-);
+};
 
 export default Favourites;

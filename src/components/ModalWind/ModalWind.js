@@ -1,12 +1,13 @@
 import React from 'react';
 import { Modal, Button, Form, Input, Select} from 'antd';
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 const { Option } = Select;
 
-const ModalWind = () => {
+const ModalWind = ({data}) => {
     const [form] = Form.useForm();
     const [isModalOpen, setIsModalOpen] = true;
-
+    const {searchTerm} = useParams();
     const handleOk = () => {
         setIsModalOpen(false);
       };
@@ -75,4 +76,4 @@ const ModalWind = () => {
   )
 }
 
-export default ModalWind
+export default ModalWind;

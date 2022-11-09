@@ -10,32 +10,33 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path='/login' element={<Authorization/>}/> 
-      <Route 
-        path='/'
-        element={
-          <PrivateRoute>
-            <MainPage/>
-          </PrivateRoute>
-        }
-      />
-      <Route 
-        path='/favourite' 
-        element={
-          <PrivateRoute>
-            <Favourites/>
-          </PrivateRoute>
-        }
-      />
-      <Route 
-        path="/search/:searchTerm" 
-        element={
-            <SearchResults/>
-        }
-      />
-    </Routes>  
+      <Route path='/login' element={<Authorization/>}/>
+          <Route 
+            path='/'
+            element={
+              <PrivateRoute>
+                <MainPage/>
+              </PrivateRoute>
+            }
+          />
+          <Route 
+            path='/favourite' 
+            element={
+              <PrivateRoute>
+                <Favourites/>
+              </PrivateRoute>
+            }
+          />
+          <Route 
+            path="/search/:searchTerm" 
+            element={
+                <SearchResults/>
+            }
+          />
+    </Routes>
   );
   
 };
 
 export default App;
+

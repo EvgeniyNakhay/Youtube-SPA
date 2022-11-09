@@ -1,12 +1,14 @@
-import {Layout, Input, Segmented, Button, Modal, Form, Select, Col, Row, Slider, InputNumber, List } from 'antd';
+import {Layout, Input, Segmented, Button, Modal, Form, Select, Col, Row, Slider, InputNumber } from 'antd';
 import React, {useState, useEffect} from 'react';
 import {HeartOutlined, AppstoreOutlined, BarsOutlined} from '@ant-design/icons';
-import './style.css';
 import MainHeader from '../../components/MainHeader/MainHeader';
 import VideoList from '../../components/VideosView/VideoList';
 import VideoCards from '../../components/VideosView/VideoCards';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFavRequest } from '../../redux/actions/favRequest';
+import {setFavRequestInput} from '../../redux/actions/favRequestInput';
+import {setRequestedVideos} from '../../redux/actions/requestedVideos';
+import { setSearchTerm } from '../../redux/actions/searchTermAction';
 const { Option } = Select;
 const { Content} = Layout;
 const { Search } = Input;
@@ -16,28 +18,53 @@ const SearchResults = () => {
   const [list, setList] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = Form.useForm();
-
-  const [videos, setVideos] = useState([])
-  const {searchTerm} = useParams();
-
-  const src = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=${searchTerm}&key=AIzaSyDuSa_snfrqupxMfqRmOU_NaH7utQtq988`
+  const dispatch = useDispatch();
+  const searchTerm = useSelector((store) => store.searchTerm);
+  const favRequestInput = useSelector((store) => store.favRequestInput);
+  const favRequest = useSelector((store) => store.favRequest);
+  // const [data, setData] = useState([]);
+  const requestedVideos = useSelector((store) => store.requestedVideos);
+  const [maxResult, setMaxResult] = useState(1);
+  const order = ['relevance', 'date', 'rating', 'title', 'videoCount', 'viewCount']
   
-  useEffect(()=>{
-    axios
-      .get(src)
-        .then((data)=>setVideos(data.data.items))
-  },[])
+  const fakeDataUrl =
+  'https://randomuser.me/api/?results=20&inc=name,gender,email,nat,picture&noinfo'; 
+  // `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${searchTerm}&type=video&key=AIzaSyDuSa_snfrqupxMfqRmOU_NaH7utQtq988`;
+  
+  
+  const appendData = () => {
+    fetch(fakeDataUrl)
+      .then((res) => res.json())
+      .then((body) => {
+        dispatch(setRequestedVideos(requestedVideos.concat(body.results)));
+        console.log(`${body.results.length} more items loaded!`);
+      });
+  };
+
+  useEffect(() => {
+    appendData();
+  }, [searchTerm]);
+  
+  // useEffect(() => {
+  //   fetchFromAPI();
+  // }, [searchTerm]);
 
   const showModal = () => {
     setIsModalOpen(true);
   };
 
   const handleOk = () => {
+    dispatch(setFavRequest(favRequestInput))
     setIsModalOpen(false);
+    {console.log(favRequest)}
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
+  };
+
+  const handleSearch = () => {
+    dispatch(setSearchTerm(searchTerm));
   };
 
   const suffix = (
@@ -51,10 +78,9 @@ const SearchResults = () => {
   );
 
   const IntegerStep = () => {
-    const [inputValue, setInputValue] = useState(1);
   
     const onChange = (newValue) => {
-      setInputValue(newValue);
+      setMaxResult(newValue);
     };
   
     return <>
@@ -74,7 +100,7 @@ const SearchResults = () => {
               marginLeft: '0',
             }}
             onChange={onChange}
-            value={typeof inputValue === 'number' ? inputValue : 0}
+            value={typeof maxResult === 'number' ? maxResult : 0}
           />
         </Col>
         <Col span={5}>
@@ -84,7 +110,7 @@ const SearchResults = () => {
             style={{
               margin: '0 9px',
             }}
-            value={inputValue}
+            value={maxResult}
             onChange={onChange}
           />
         </Col>
@@ -97,7 +123,6 @@ const SearchResults = () => {
   {/* <Navigate replace to="/authorization" /> */}
     <Layout>
         <MainHeader/>
-        <>
             <Content 
               style={{
                 height: '100%',
@@ -119,9 +144,9 @@ const SearchResults = () => {
                     enterButton="Найти"
                     size="large"
                     suffix={suffix}
-                    // value = {inputValue}
-                    // onChange={(e) => setInputValue(e.target.value)}
-                    // onSearch={() => handleSearch()}
+                    value = {searchTerm}
+                    onChange={(e) => dispatch(setSearchTerm(e.target.value))}
+                    onSearch={handleSearch}
                   />
                 </Content> 
                 <Content 
@@ -155,17 +180,15 @@ const SearchResults = () => {
                     ]}
                   />
                 </Content>
-                
                   {list ?
-                    <VideoList videos={videos}/> 
+                    <VideoList/> 
                     : 
-                    <VideoCards videos={videos}/>
+                    <VideoCards/>
                   }
             </Content>
-              
-        </>   
-    </Layout>
-    <Modal
+      </Layout>
+    {isModalOpen && 
+      <Modal
       style={{textAlign:'center'}}
       title="Сохранить запрос"
       open={isModalOpen} 
@@ -190,8 +213,16 @@ const SearchResults = () => {
       <Form.Item label="Запрос">
         <Input placeholder={searchTerm} disabled />
       </Form.Item>
-      <Form.Item name='name' label="Название" rules={[{ required: true }]}>
-        <Input placeholder="Укажите название" />
+      <Form.Item 
+        name='name' 
+        label="Название" 
+        rules={[{ required: true }]}
+      >
+        <Input 
+          placeholder="Укажите название"
+          value={favRequestInput}
+          onChange={(e) => dispatch(setFavRequestInput(e.target.value))} 
+        />
       </Form.Item>
       <Form.Item
         label="Сортировать по"
@@ -214,6 +245,7 @@ const SearchResults = () => {
       <IntegerStep/>
     </Form>
     </Modal>
+    }
   </>
 };
 

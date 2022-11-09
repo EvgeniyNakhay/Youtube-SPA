@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 const { Content} = Layout;
 
 const Favourites = () => {
-  const favRequest = useSelector((store) => store.favRequest);
+  const requestNameF = useSelector((store) => store.requestNameF);
   return <>
   {/* <Navigate replace to="/authorization" /> */}
     <Layout style={{height: '100vh'}}>
@@ -34,7 +34,7 @@ const Favourites = () => {
                 background: '#FFF'
               }}
               size="large"
-              dataSource={favRequest}
+              dataSource={requestNameF}
               renderItem={(item) => <List.Item><a href="https://ant.design" style={{fontWeight: 500, color: '#000000'}}>{item.title}</a></List.Item>}
             />
         </Content>

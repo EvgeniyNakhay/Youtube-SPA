@@ -5,7 +5,7 @@ import MainHeader from '../../components/MainHeader/MainHeader';
 import VideoList from '../../components/VideosView/VideoList';
 import VideoCards from '../../components/VideosView/VideoCards';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFavRequest } from '../../redux/actions/favRequest';
+import { setRequestNameF } from '../../redux/actions/favRequest';
 import {setFavRequestInput} from '../../redux/actions/favRequestInput';
 import {setRequestedVideos} from '../../redux/actions/requestedVideos';
 import { setSearchTerm } from '../../redux/actions/searchTermAction';
@@ -54,7 +54,7 @@ const SearchResults = () => {
   };
 
   const handleOk = () => {
-    dispatch(setFavRequest(favRequestInput))
+    dispatch(setRequestNameF(favRequestInput))
     setIsModalOpen(false);
     {console.log(favRequest)}
   };

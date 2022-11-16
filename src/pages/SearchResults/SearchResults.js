@@ -1,11 +1,11 @@
-import {Layout, Input, Segmented, Button, Modal, Form, Select, Col, Row, Slider, InputNumber } from 'antd';
+import {Layout, Input, Segmented, Button, Modal, Form, Select, Col, Row, Slider, InputNumber} from 'antd';
 import React, {useState, useEffect} from 'react';
 import {HeartOutlined, AppstoreOutlined, BarsOutlined} from '@ant-design/icons';
 import MainHeader from '../../components/MainHeader/MainHeader';
 import VideoList from '../../components/VideosView/VideoList';
 import VideoCards from '../../components/VideosView/VideoCards';
 import { useDispatch, useSelector } from 'react-redux';
-import { setRequestNameF } from '../../redux/actions/favRequest';
+import { setRequestNameF, setSortByF } from '../../redux/actions/favRequest';
 import {setFavRequestInput} from '../../redux/actions/favRequestInput';
 import {setRequestedVideos} from '../../redux/actions/requestedVideos';
 import { setSearchTerm } from '../../redux/actions/searchTermAction';
@@ -15,6 +15,7 @@ const { Search } = Input;
 // const onSearch = (value) => console.log(value);
 
 const SearchResults = () => {
+
   const [list, setList] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = Form.useForm();
@@ -22,6 +23,7 @@ const SearchResults = () => {
   const searchTerm = useSelector((store) => store.searchTerm);
   const favRequestInput = useSelector((store) => store.favRequestInput);
   const favRequest = useSelector((store) => store.favRequest);
+  const sortByF = useSelector((store) => store.sortByF);
   // const [data, setData] = useState([]);
   const requestedVideos = useSelector((store) => store.requestedVideos);
   const [maxResult, setMaxResult] = useState(1);
@@ -30,7 +32,6 @@ const SearchResults = () => {
   const fakeDataUrl =
   'https://randomuser.me/api/?results=20&inc=name,gender,email,nat,picture&noinfo'; 
   // `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${searchTerm}&type=video&key=AIzaSyDuSa_snfrqupxMfqRmOU_NaH7utQtq988`;
-  
   
   const appendData = () => {
     fetch(fakeDataUrl)
@@ -54,9 +55,9 @@ const SearchResults = () => {
   };
 
   const handleOk = () => {
-    dispatch(setRequestNameF(favRequestInput))
+    dispatch(setRequestNameF(favRequestInput));
+    console.log(favRequest)
     setIsModalOpen(false);
-    {console.log(favRequest)}
   };
 
   const handleCancel = () => {
@@ -65,6 +66,10 @@ const SearchResults = () => {
 
   const handleSearch = () => {
     dispatch(setSearchTerm(searchTerm));
+  };
+
+  const handleChangeSortBy = (value) => {
+    dispatch(setSortByF(value));
   };
 
   const suffix = (
@@ -189,27 +194,27 @@ const SearchResults = () => {
       </Layout>
     {isModalOpen && 
       <Modal
-      style={{textAlign:'center'}}
-      title="Сохранить запрос"
-      open={isModalOpen} 
-      onOk={handleOk} 
-      onCancel={handleCancel}
-      footer={[
-        <Button key="back" onClick={handleCancel}>
-          Не сохранять
-        </Button>,
-        <Button key="submit" type="primary" onClick={handleOk}>
-          Сохранить
-        </Button>
-      ]}
-    >
+        style={{textAlign:'center'}}
+        title="Сохранить запрос"
+        open={isModalOpen} 
+        onOk={handleOk} 
+        onCancel={handleCancel}
+        footer={[
+          <Button key="back" onClick={handleCancel}>
+            Не сохранять
+          </Button>,
+          <Button key="submit" type="primary" onClick={handleOk}>
+            Сохранить
+          </Button>
+        ]}
+      >
       <Form
-      layout='vertical'
-      form={form}
-      initialValues={{
-        layout: 'vertical',
-      }}
-    >
+        layout='vertical'
+        form={form}
+        initialValues={{
+          layout: 'vertical',
+        }}
+      >
       <Form.Item label="Запрос">
         <Input placeholder={searchTerm} disabled />
       </Form.Item>
@@ -234,12 +239,36 @@ const SearchResults = () => {
       >
         <Select
           style={{textAlign: 'left'}}
-          placeholder="Без сортировки"
-          allowClear
+          // placeholder="Без сортировки"
+          defaultValue="rating"
+          onChange={handleChangeSortBy}
+          options={[
+            {
+              value: 'date',
+              label: 'Дате',
+            },
+            {
+              value: 'rating',
+              label: 'Рейтингу',
+            },
+            {
+              value: 'relevance',
+              label: 'Актуальности',
+            },
+            {
+              value: 'title',
+              label: 'Названию',
+            },
+            {
+              value: 'videoCount',
+              label: 'Количеству видео',
+            },
+            {
+              value: 'viewCount',
+              label: 'Количеству просмотров',
+            },
+          ]}
         >
-          <Option value="male">male</Option>
-          <Option value="female">female</Option>
-          <Option value="other">other</Option>
         </Select>
       </Form.Item>
       <IntegerStep/>

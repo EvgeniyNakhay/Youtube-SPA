@@ -5,8 +5,7 @@ import MainHeader from '../../components/MainHeader/MainHeader';
 import VideoList from '../../components/VideosView/VideoList';
 import VideoCards from '../../components/VideosView/VideoCards';
 import { useDispatch, useSelector } from 'react-redux';
-import { setRequestNameF, setSortByF } from '../../redux/actions/favRequest';
-import {setFavRequestInput} from '../../redux/actions/favRequestInput';
+import { setQueryF, setQueryNameF, setSortByF } from '../../redux/actions/favRequest';
 import {setRequestedVideos} from '../../redux/actions/requestedVideos';
 import { setSearchTerm } from '../../redux/actions/searchTermAction';
 const { Option } = Select;
@@ -21,8 +20,8 @@ const SearchResults = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const searchTerm = useSelector((store) => store.searchTerm);
-  const favRequestInput = useSelector((store) => store.favRequestInput);
-  const favRequest = useSelector((store) => store.favRequest);
+  const queryF = useSelector((store) => store.queryF)
+  const nameF = useSelector((store) => store.nameF);
   const sortByF = useSelector((store) => store.sortByF);
   // const [data, setData] = useState([]);
   const requestedVideos = useSelector((store) => store.requestedVideos);
@@ -55,8 +54,6 @@ const SearchResults = () => {
   };
 
   const handleOk = () => {
-    dispatch(setRequestNameF(favRequestInput));
-    console.log(favRequest)
     setIsModalOpen(false);
   };
 
@@ -68,9 +65,17 @@ const SearchResults = () => {
     dispatch(setSearchTerm(searchTerm));
   };
 
+  const handleChangeName = (e) => {
+    const value = e.target.value;
+    dispatch(setQueryNameF(value));
+  }
+
   const handleChangeSortBy = (value) => {
+    value = {sortByF};
     dispatch(setSortByF(value));
-  };
+    console.log(sortByF)
+  }
+
 
   const suffix = (
     <HeartOutlined
@@ -216,7 +221,9 @@ const SearchResults = () => {
         }}
       >
       <Form.Item label="Запрос">
-        <Input placeholder={searchTerm} disabled />
+        <Input 
+          placeholder={searchTerm} 
+          disabled />
       </Form.Item>
       <Form.Item 
         name='name' 
@@ -225,9 +232,8 @@ const SearchResults = () => {
       >
         <Input 
           placeholder="Укажите название"
-          value={favRequestInput}
-          onChange={(e) => dispatch(setFavRequestInput(e.target.value))} 
-        />
+          value={nameF}
+          onChange={handleChangeName}/>
       </Form.Item>
       <Form.Item
         label="Сортировать по"
@@ -238,9 +244,8 @@ const SearchResults = () => {
         ]}
       >
         <Select
+          defaultValue='rating'
           style={{textAlign: 'left'}}
-          // placeholder="Без сортировки"
-          defaultValue="rating"
           onChange={handleChangeSortBy}
           options={[
             {
@@ -267,9 +272,7 @@ const SearchResults = () => {
               value: 'viewCount',
               label: 'Количеству просмотров',
             },
-          ]}
-        >
-        </Select>
+          ]}/>
       </Form.Item>
       <IntegerStep/>
     </Form>

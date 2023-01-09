@@ -4,7 +4,7 @@ import MainPage from './pages/MainPage/MainPage';
 import Favourites from './pages/Favourites/Favourites';
 import SearchResults from './pages/SearchResults/SearchResults';
 import { Routes,Route} from 'react-router-dom';
-import  PrivateRoute  from './hoc/index';
+// import  PrivateRoute  from './hoc/index';
 
 const App = () => {
 
@@ -14,17 +14,17 @@ const App = () => {
           <Route 
             path='/'
             element={
-              <PrivateRoute>
+              // <PrivateRoute>
                 <MainPage/>
-              </PrivateRoute>
+              // </PrivateRoute>
             }
           />
           <Route 
             path='/favourite' 
             element={
-              <PrivateRoute>
+              // <PrivateRoute>
                 <Favourites/>
-              </PrivateRoute>
+              // </PrivateRoute>
             }
           />
           <Route 

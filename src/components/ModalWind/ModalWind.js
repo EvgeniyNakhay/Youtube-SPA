@@ -47,10 +47,18 @@ const ModalWind = ({data}) => {
       }}
     >
       <Form.Item label="Запрос">
-        <Input placeholder="input placeholder" disabled />
+        <Input 
+          disabled
+          value={queryF}/>
       </Form.Item>
-      <Form.Item name='name' label="Название" rules={[{ required: true }]}>
-        <Input placeholder="Укажите название" />
+      <Form.Item 
+        name='name' 
+        label="Название" 
+        rules={[{ required: true }]}>
+        <Input 
+          placeholder="Укажите название"
+          value={nameF}
+          onChange={handleChangeName}/>
       </Form.Item>
       <Form.Item
         label="Сортировать по"
@@ -64,10 +72,14 @@ const ModalWind = ({data}) => {
           style={{textAlign: 'left'}}
           placeholder="Без сортировки"
           allowClear
-        >
-          <Option value="male">male</Option>
-          <Option value="female">female</Option>
-          <Option value="other">other</Option>
+          value={sortByF}
+          onChange={handleChangeSortBy}>
+          <Option>date</Option>
+          <Option>rating</Option>
+          <Option>relevance</Option>
+          <Option>title</Option>
+          <Option>videoCount</Option>
+          <Option>viewCount</Option>
         </Select>
       </Form.Item>
       <IntegerStep/>

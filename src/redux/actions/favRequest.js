@@ -1,4 +1,4 @@
-import { SET_REQUEST_F, SET_REQUEST_NAME_F, SET_SORT_BY_F, SET_MAX_RESULT_F} from "./actionTypes";
+import { SET_QUERY_F, SET_QUERY_NAME_F, SET_SORT_BY_F, SET_MAX_RESULTS_F} from "./actionTypes";
 
 export const setRequestF = (requestF) => {
     return {
@@ -6,22 +6,23 @@ export const setRequestF = (requestF) => {
         payload: requestF
     }
 }
-export const setRequestNameF = (requestNameF) => {
-    return {
-        type: 'SET_REQUEST_NAME_F',
-        payload: requestNameF
-    }
-}
-export const setSortByF = (sortByF) => {
-    return {
-        type: 'SET_SORT_BY_F',
-        payload: sortByF 
-    }
-}
-export const setMaxResultF = (maxResultF) => {
-    return {
-        type: 'SET_MAX_RESULT_F',
-        payload: maxResultF 
-    }
-}
 
+export const setQueryF = (queryF) => ({
+  type: 'SET_QUERY_F',
+  payload: queryF
+});
+
+export const setQueryNameF = (nameF) => ({
+    type: SET_QUERY_NAME_F,
+    nameF
+  });
+
+  export const setSortByF = (sortByF) => ({
+    type: 'SET_SORT_BY_F',
+    payload: sortByF
+  });
+
+export const setMaxResultsF = (maxResultsF) => ({
+  type: SET_MAX_RESULTS_F,
+  maxResultsF
+});

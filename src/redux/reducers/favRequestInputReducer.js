@@ -12,3 +12,4 @@ export default function favRequestInputReducer(state = initialValue, action) {
         } 
     }
 }
+

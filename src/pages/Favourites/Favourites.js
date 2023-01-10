@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 const { Content} = Layout;
 
 const Favourites = () => {
-  const favRequestReducer = useSelector((store) => store.initialFavourites);
+  const favourites = useSelector((store) => store.favourites);
   return <>
   {/* <Navigate replace to="/authorization" /> */}
     <Layout style={{height: '100vh'}}>
@@ -34,8 +34,8 @@ const Favourites = () => {
                 background: '#FFF'
               }}
               size="large"
-              dataSource={favRequestReducer}
-              renderItem={(item) => <List.Item>{item.queryF}</List.Item>}
+              dataSource={favourites}
+              renderItem={(item) => <List.Item>{item.favRequest}</List.Item>}
             />
         </Content>
       </>   

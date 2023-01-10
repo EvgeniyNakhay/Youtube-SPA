@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
 import searchTermReducer from './searchTermReducer';
-import favRequestInputReducer from './favRequestInputReducer';
+// import favRequestInputReducer from './favRequestInputReducer';
 import favRequestReducer from "./favRequestReducer";
 import requestedVideosReducer from "./requestedVideosReducer"
 
 export default combineReducers({
     searchTerm: searchTermReducer,
-    favRequestInput: favRequestInputReducer,
-    favRequest: favRequestReducer,
+    // favRequestInput: favRequestInputReducer,
+    favourites: favRequestReducer,
     requestedVideos: requestedVideosReducer,
 })

@@ -5,9 +5,9 @@ import MainHeader from '../../components/MainHeader/MainHeader';
 import VideoList from '../../components/VideosView/VideoList';
 import VideoCards from '../../components/VideosView/VideoCards';
 import { useDispatch, useSelector } from 'react-redux';
-import { setQueryF, setQueryNameF, setSortByF } from '../../redux/actions/favRequest';
 import {setRequestedVideos} from '../../redux/actions/requestedVideos';
 import { setSearchTerm } from '../../redux/actions/searchTermAction';
+import { setFavRequest } from '../../redux/actions/favRequest';
 const { Option } = Select;
 const { Content} = Layout;
 const { Search } = Input;
@@ -21,7 +21,7 @@ const SearchResults = () => {
   const dispatch = useDispatch();
   const searchTerm = useSelector((store) => store.searchTerm);
   const queryF = useSelector((store) => store.queryF)
-  const nameF = useSelector((store) => store.nameF);
+  const favRequest = useSelector((store) => store.nameF);
   const sortByF = useSelector((store) => store.sortByF);
   // const [data, setData] = useState([]);
   const requestedVideos = useSelector((store) => store.requestedVideos);
@@ -67,14 +67,14 @@ const SearchResults = () => {
 
   const handleChangeName = (e) => {
     const value = e.target.value;
-    dispatch(setQueryNameF(value));
+    dispatch(setFavRequest(value));
   }
 
-  const handleChangeSortBy = (value) => {
-    value = {sortByF};
-    dispatch(setSortByF(value));
-    console.log(sortByF)
-  }
+  // const handleChangeSortBy = (value) => {
+  //   value = {sortByF};
+  //   dispatch(setSortByF(value));
+  //   console.log(sortByF)
+  // }
 
 
   const suffix = (
@@ -232,10 +232,10 @@ const SearchResults = () => {
       >
         <Input 
           placeholder="Укажите название"
-          value={nameF}
+          value={favRequest}
           onChange={handleChangeName}/>
       </Form.Item>
-      <Form.Item
+      {/* <Form.Item
         label="Сортировать по"
         rules={[
           {
@@ -273,7 +273,7 @@ const SearchResults = () => {
               label: 'Количеству просмотров',
             },
           ]}/>
-      </Form.Item>
+      </Form.Item> */}
       <IntegerStep/>
     </Form>
     </Modal>

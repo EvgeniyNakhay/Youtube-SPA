@@ -1,12 +1,13 @@
-import { Breadcrumb, Layout, Menu, theme } from "antd";
+import { Breadcrumb, Layout, Menu } from "antd";
 import MainHeader from "../../../components/MainHeader/MainHeader";
+import MainInput from "../../../components/MainInput/MainInput";
 
 const { Header, Content, Footer } = Layout;
 
 const MainPage = () => {
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
+  //   const {
+  //     token: { colorBgContainer },
+  //   } = theme.useToken();
 
   return (
     <Layout>
@@ -16,10 +17,10 @@ const MainPage = () => {
           style={{
             padding: 24,
             minHeight: 380,
-            background: colorBgContainer,
+            // background: colorBgContainer,
           }}
         >
-          Content
+          <MainInput />
         </div>
       </Content>
     </Layout>

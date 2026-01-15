@@ -1,3 +1,4 @@
+import ModalWind from "./components/ModalWind/ModalWind";
 import Authorization from "./pages/Authorization/Authorization";
 import MainPage from "./pages/Authorization/MainPage/MainPage";
 import Favourites from "./pages/Favourites/Favourites";
@@ -8,7 +9,8 @@ function App() {
     <>
       {/* <Authorization /> */}
       {/* <MainPage /> */}|{/* <SearchResults /> */}
-      <Favourites />
+      {/* <Favourites /> */}
+      <ModalWind />
     </>
   );
 }

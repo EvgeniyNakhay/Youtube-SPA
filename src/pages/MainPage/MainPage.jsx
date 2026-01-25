@@ -1,6 +1,6 @@
 import { Breadcrumb, Layout, Menu } from "antd";
-import MainHeader from "../../../components/MainHeader/MainHeader";
-import MainInput from "../../../components/MainInput/MainInput";
+import MainHeader from "../../components/MainHeader/MainHeader";
+import MainInput from "../../components/MainInput/MainInput";
 
 const { Header, Content, Footer } = Layout;
 

@@ -3,6 +3,7 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 // import React, { useEffect, useState } from "react";
 import "./style.css";
 import MainHeader from "../../components/MainHeader/MainHeader";
+// import { useNavigate } from "react-router";
 // import { useDispatch, useSelector } from "react-redux";
 // import { setIsEditModalOpen } from "../../redux/actions/isEditModalOpen";
 // import EditModalWind from "../../components/ModalWind/EditModalWind";
@@ -12,12 +13,11 @@ import MainHeader from "../../components/MainHeader/MainHeader";
 // } from "../../redux/actions/favouritesAction";
 // import { activeFavRequest } from "../../redux/actions/activeFavRequest";
 // import { NavLink } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
 // import { setSearchTerm } from "../../redux/actions/searchTermAction";
 const { Content } = Layout;
 
 const Favourites = () => {
-  //   const navigate = useNavigate();
+  // const navigate = useNavigate();
   //   const [requests, setRequests] = useState(null);
   //   const favourites = useSelector((store) => store.favourites);
   //   const isEditModalOpen = useSelector((store) => store.isEditModalOpen);

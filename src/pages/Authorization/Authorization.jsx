@@ -2,10 +2,13 @@ import logo from "./images/logo.svg";
 
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Flex, Form, Input } from "antd";
+import { useNavigate } from "react-router";
 
 const Authorization = () => {
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+  const navigate = useNavigate();
+
+  const onFinish = () => {
+    navigate("/");
   };
   return (
     <Form

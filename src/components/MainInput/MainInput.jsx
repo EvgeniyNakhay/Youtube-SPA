@@ -1,6 +1,6 @@
 // import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
 import { Layout, Row, Input, Col } from "antd";
+import { useNavigate } from "react-router";
 // import { useDispatch, useSelector } from "react-redux";
 // import { setSearchTerm } from "../../redux/actions/searchTermAction";
 // import { activeFavRequest } from "../../redux/actions/activeFavRequest";
@@ -8,6 +8,11 @@ const { Content } = Layout;
 const { Search } = Input;
 
 const MainInput = () => {
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    navigate("/searchResults");
+  };
   return (
     <Layout>
       <Row>
@@ -37,7 +42,7 @@ const MainInput = () => {
               //   onChange={(e) => setSearchTermInput(e.target.value)}
               //   value={searchTermInput}
               size="large"
-              //   onSearch={handleSearch}
+              onSearch={handleSearch}
             />
           </Content>
         </Col>

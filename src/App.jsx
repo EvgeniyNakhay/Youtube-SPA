@@ -1,16 +1,18 @@
-import ModalWind from "./components/ModalWind/ModalWind";
 import Authorization from "./pages/Authorization/Authorization";
-import MainPage from "./pages/Authorization/MainPage/MainPage";
 import Favourites from "./pages/Favourites/Favourites";
+import MainPage from "./pages/MainPage/MainPage";
 import SearchResults from "./pages/SearchResults/SearchResults";
+import { Routes, Route } from "react-router";
 
 function App() {
   return (
     <>
-      {/* <Authorization /> */}
-      {/* <MainPage /> */}|{/* <SearchResults /> */}
-      {/* <Favourites /> */}
-      <ModalWind />
+      <Routes>
+        <Route path="/authorization" element={<Authorization />} />
+        <Route path="/" element={<MainPage />} />
+        <Route path="/searchResults" element={<SearchResults />} />
+        <Route path="/favourites" element={<Favourites />} />
+      </Routes>
     </>
   );
 }

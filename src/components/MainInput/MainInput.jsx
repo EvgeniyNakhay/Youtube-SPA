@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 // import { useDispatch, useSelector } from "react-redux";
 // import { setSearchTerm } from "../../redux/actions/searchTermAction";
 // import { activeFavRequest } from "../../redux/actions/activeFavRequest";
+
 const { Content } = Layout;
 const { Search } = Input;
 

@@ -6,6 +6,7 @@ import {
   BarsOutlined,
 } from "@ant-design/icons";
 import MainHeader from "../../components/MainHeader/MainHeader";
+import { useState } from "react";
 // import ModalWind from "../../components/ModalWind/ModalWind";
 // import VideoList from "../../components/VideosView/VideoList";
 // import VideoCards from "../../components/VideosView/VideoCards";
@@ -25,6 +26,7 @@ const SearchResults = () => {
   //   const [searchTermInput, setSearchTermInput] = useState(searchTerm);
   //   const requestedVideos = useSelector((store) => store.requestedVideos);
   //   const isModalOpen = useSelector((store) => store.isModalOpen);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   //   const api_key = "AIzaSyDuSa_snfrqupxMfqRmOU_NaH7utQtq988";
   //   const video_http = "https://www.googleapis.com/youtube/v3/videos";
@@ -59,23 +61,23 @@ const SearchResults = () => {
   //       });
   //   }, [searchTerm]);
 
-  //   const showModal = () => {
-  //     dispatch(setIsModalOpen(true));
-  //   };
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
 
   //   const handleSearch = () => {
   //     dispatch(setSearchTerm(searchTermInput));
   //   };
 
-  //   const suffix = (
-  //     <HeartOutlined
-  //       //   onClick={() => showModal()}
-  //       style={{
-  //         fontSize: 16,
-  //         color: "#1890ff",
-  //       }}
-  //     />
-  //   );
+  const suffix = (
+    <HeartOutlined
+      onClick={() => showModal()}
+      style={{
+        fontSize: 16,
+        color: "#1890ff",
+      }}
+    />
+  );
 
   return (
     <>
@@ -100,7 +102,7 @@ const SearchResults = () => {
               placeholder="Что хотите посмотреть?"
               enterButton="Найти"
               size="large"
-              //   suffix={suffix}
+              suffix={suffix}
               //   value={searchTermInput}
               //   onChange={(e) => setSearchTermInput(e.target.value)}
               //   onSearch={handleSearch}
@@ -150,7 +152,7 @@ const SearchResults = () => {
           {/* {list ? <VideoList /> : <VideoCards />} */}
         </Content>
       </Layout>
-      {/* {isModalOpen && <ModalWind />} */}
+      {isModalOpen && <ModalWind />}
     </>
   );
 };

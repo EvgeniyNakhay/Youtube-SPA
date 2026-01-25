@@ -7,7 +7,7 @@ import {
 } from "@ant-design/icons";
 import MainHeader from "../../components/MainHeader/MainHeader";
 import { useState } from "react";
-// import ModalWind from "../../components/ModalWind/ModalWind";
+import ModalWind from "../../components/ModalWind/ModalWind";
 // import VideoList from "../../components/VideosView/VideoList";
 // import VideoCards from "../../components/VideosView/VideoCards";
 // import { useDispatch, useSelector } from "react-redux";

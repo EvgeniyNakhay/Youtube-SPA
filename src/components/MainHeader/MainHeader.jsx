@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import logo from "./images/logo.svg";
 import "./style.css";
 
@@ -6,7 +6,18 @@ import { Breadcrumb, Layout, Menu } from "antd";
 
 const { Header, Content, Footer } = Layout;
 
+const items = [
+  { key: "/", label: "Поиск" },
+  { key: "/favourites", label: "Избранное" },
+  { key: "/login", label: "Выйти" },
+];
 const MainHeader = () => {
+  const navigate = useNavigate();
+
+  const handleNavigateTo = (e) => {
+    navigate(`${e.key}`);
+  };
+
   return (
     <Header
       style={{
@@ -17,18 +28,12 @@ const MainHeader = () => {
       <div className="container">
         <div className="menu">
           <img className="logo" src={logo} alt="logo" />
-          <Menu theme="light" mode="horizontal">
-            <Menu.Item>
-              <NavLink to="/">Поиск</NavLink>
-            </Menu.Item>
-            <Menu.Item>
-              <NavLink to="/favourites">Избранное</NavLink>
-            </Menu.Item>
-            <Menu.Item>
-              <NavLink to="/authorization">Выйти</NavLink>
-            </Menu.Item>
-          </Menu>
-          <Menu theme="light" mode="horizontal"></Menu>
+          <Menu
+            theme="light"
+            mode="horizontal"
+            items={items}
+            onClick={handleNavigateTo}
+          />
         </div>
       </div>
     </Header>

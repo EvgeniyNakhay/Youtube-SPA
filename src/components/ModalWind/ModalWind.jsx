@@ -16,7 +16,7 @@ import {
 // import { setFavRequest } from "../../redux/actions/favRequest";
 
 const ModalWind = () => {
-  const [form] = Form.useForm();
+  // const [form] = Form.useForm();
   //   const dispatch = useDispatch();
   //   const [favRequestInput, setFavRequestInput] = useState("");
   //   const [sortByF, setSortByF] = useState("rating");
@@ -42,36 +42,80 @@ const ModalWind = () => {
   //     setMaxResult(newValue);
   //   };
 
+  const handleOk = () => {
+    // setLoading(true);
+    // setTimeout(() => {
+    //   setLoading(false);
+    //   setOpen(false);
+    // }, 3000);
+  };
+
+  const handleCancel = () => {
+    // setOpen(false);
+  };
+
   return (
     <Modal
-      style={{ textAlign: "center" }}
-      title="Сохранить запрос"
-      //   open={isModalOpen}
-      //   onOk={handleOk}
-      //   onCancel={handleCancel}
+      open={open}
+      title="Title"
+      onOk={handleOk}
+      onCancel={handleCancel}
       footer={[
-        <Button
-          key="back"
-          // onClick={handleCancel}
-        >
-          Не сохранять
+        <Button key="back" onClick={handleCancel}>
+          Return
+        </Button>,
+        <Button key="submit" type="primary" onClick={handleOk}>
+          Submit
         </Button>,
         <Button
-          key="submit"
+          key="link"
+          href="https://google.com"
+          target="_blank"
           type="primary"
-          // onClick={handleOk}
+          onClick={handleOk}
         >
-          Сохранить
+          Search on Google
         </Button>,
       ]}
     >
-      <Form
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+    </Modal>
+    // <Modal
+    //   style={{ textAlign: "center" }}
+    //   title="Сохранить запрос"
+    //   centered
+    //   //   open={isModalOpen}
+    //   //   onOk={handleOk}
+    //   //   onCancel={handleCancel}
+    //   footer={[
+    //     <Button
+    //       key="back"
+    //       // onClick={handleCancel}
+    //     >
+    //       Не сохранять
+    //     </Button>,
+    //     <Button
+    //       key="submit"
+    //       type="primary"
+    //       // onClick={handleOk}
+    //     >
+    //       Сохранить
+    //     </Button>,
+    //   ]}
+    // >
+    // {
+    /* <Form
         layout="vertical"
         form={form}
         initialValues={{
           layout: "vertical",
         }}
       >
+        //{" "}
         <Form.Item label="Запрос">
           <Input
             //   placeholder={searchTerm}
@@ -152,8 +196,9 @@ const ModalWind = () => {
             </Col>
           </Row>
         </Form.Item>
-      </Form>
-    </Modal>
+      </Form> */
+    // }
+    // </Modal>
   );
 };
 

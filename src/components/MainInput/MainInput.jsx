@@ -1,7 +1,8 @@
 // import React, { useState } from "react";
 import { Layout, Row, Input, Col } from "antd";
 import { useNavigate } from "react-router";
-// import { useDispatch, useSelector } from "react-redux";
+import { setSearchTerm } from "../../redux/slices/searchTermSlice";
+import { useDispatch, useSelector } from "react-redux";
 // import { setSearchTerm } from "../../redux/actions/searchTermAction";
 // import { activeFavRequest } from "../../redux/actions/activeFavRequest";
 
@@ -9,11 +10,14 @@ const { Content } = Layout;
 const { Search } = Input;
 
 const MainInput = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const searchTerm = useSelector((store) => store.searchTerm.value);
 
   const handleSearch = () => {
     navigate("/searchResults");
   };
+
   return (
     <Layout>
       <Row>
@@ -40,8 +44,8 @@ const MainInput = () => {
             <Search
               placeholder="Что хотите посмотреть?"
               enterButton="Найти"
-              //   onChange={(e) => setSearchTermInput(e.target.value)}
-              //   value={searchTermInput}
+              onChange={(e) => dispatch(setSearchTerm(e.target.value))}
+              value={searchTerm}
               size="large"
               onSearch={handleSearch}
             />

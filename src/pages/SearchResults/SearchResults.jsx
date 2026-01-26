@@ -8,9 +8,9 @@ import {
 import MainHeader from "../../components/MainHeader/MainHeader";
 import { useState } from "react";
 import ModalWind from "../../components/ModalWind/ModalWind";
+import { useSelector } from "react-redux";
 // import VideoList from "../../components/VideosView/VideoList";
 // import VideoCards from "../../components/VideosView/VideoCards";
-// import { useDispatch, useSelector } from "react-redux";
 // import { setIsModalOpen } from "../../redux/actions/isModalOpen";
 // import { setRequestedVideos } from "../../redux/actions/requestedVideos";
 // import { setSearchTerm } from "../../redux/actions/searchTermAction";
@@ -25,7 +25,7 @@ const SearchResults = () => {
   //   const { maxResult, sortByF } = useSelector((store) => store.activeFavRequest);
   //   const [searchTermInput, setSearchTermInput] = useState(searchTerm);
   //   const requestedVideos = useSelector((store) => store.requestedVideos);
-  //   const isModalOpen = useSelector((store) => store.isModalOpen);
+  const searchTerm = useSelector((store) => store.searchTerm.value);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   //   const api_key = "AIzaSyDuSa_snfrqupxMfqRmOU_NaH7utQtq988";
@@ -103,8 +103,8 @@ const SearchResults = () => {
               enterButton="Найти"
               size="large"
               suffix={suffix}
-              //   value={searchTermInput}
-              //   onChange={(e) => setSearchTermInput(e.target.value)}
+              value={searchTerm}
+              // onChange={(e) => setSearchTermInput(e.target.value)}
               //   onSearch={handleSearch}
             />
           </Content>

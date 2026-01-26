@@ -9,7 +9,7 @@ const { Header, Content, Footer } = Layout;
 const items = [
   { key: "/", label: "Поиск" },
   { key: "/favourites", label: "Избранное" },
-  { key: "/login", label: "Выйти" },
+  { key: "/authorization", label: "Выйти" },
 ];
 const MainHeader = () => {
   const navigate = useNavigate();

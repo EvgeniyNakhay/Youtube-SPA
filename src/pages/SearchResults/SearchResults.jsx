@@ -71,7 +71,7 @@ const SearchResults = () => {
 
   const suffix = (
     <HeartOutlined
-      onClick={() => showModal()}
+      onClick={showModal}
       style={{
         fontSize: 16,
         color: "#1890ff",
@@ -152,7 +152,9 @@ const SearchResults = () => {
           {/* {list ? <VideoList /> : <VideoCards />} */}
         </Content>
       </Layout>
-      {isModalOpen && <ModalWind />}
+      {isModalOpen && (
+        <ModalWind isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      )}
     </>
   );
 };

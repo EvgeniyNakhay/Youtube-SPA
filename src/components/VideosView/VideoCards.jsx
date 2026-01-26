@@ -4,25 +4,29 @@ import { useSelector } from "react-redux";
 import "./VideoCards.css";
 const { Meta } = Card;
 
-const VideoCards = () => {
-  const requestedVideos = useSelector((store) => store.requestedVideos);
+const VideoCards = ({ titles, images }) => {
+  // const requestedVideos = useSelector((store) => store.requestedVideos);
   return (
     <div className="video-container">
-      {requestedVideos.map((item) => (
+      {titles.map((item) => (
         <div className="video">
           <img
-            src={item.snippet?.thumbnails?.high?.url}
+            // src={item.snippet?.thumbnails?.high?.url}
+            src={images.message}
             className="thumbnail"
-            alt={item.snippet?.title}
+            // alt={item.snippet?.title}
           />
           <div className="content">
             <a
-              href={`https://www.youtube.com/results?search_query=${item.snippet?.title}`}
+              // href={`https://www.youtube.com/results?search_query=${item.snippet?.title}`}
               className="title"
             >
-              {item.snippet?.title.slice(0, 60)}
+              {/* {item.snippet?.title.slice(0, 60)} */}
+              {item.title}
             </a>
-            <p className="channel-name">{item.snippet?.channelTitle}</p>
+            {/* <p className="channel-name">{item.snippet?.channelTitle}</p> */}
+            <p className="channel-name-list">{item.name}</p>
+
             <p className="view-count">786 тыс. просмотров</p>
           </div>
         </div>

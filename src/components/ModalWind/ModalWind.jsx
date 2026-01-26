@@ -9,8 +9,8 @@ import {
   Slider,
   InputNumber,
 } from "antd";
+import { useSelector } from "react-redux";
 // import { useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
 // import { setIsModalOpen } from "../../redux/actions/isModalOpen";
 // import { addToFavourites } from "../../redux/actions/favouritesAction";
 // import { setFavRequest } from "../../redux/actions/favRequest";
@@ -21,7 +21,7 @@ const ModalWind = ({ isModalOpen, setIsModalOpen }) => {
   //   const [favRequestInput, setFavRequestInput] = useState("");
   //   const [sortByF, setSortByF] = useState("rating");
   //   const [maxResult, setMaxResult] = useState(12);
-  //   const searchTerm = useSelector((store) => store.searchTerm);
+  const searchTerm = useSelector((store) => store.searchTerm.value);
   //   const isModalOpen = useSelector((store) => store.isModalOpen);
 
   //   const handleOk = () => {
@@ -85,10 +85,7 @@ const ModalWind = ({ isModalOpen, setIsModalOpen }) => {
           }}
         >
           <Form.Item label="Запрос">
-            <Input
-              //   placeholder={searchTerm}
-              disabled
-            />
+            <Input placeholder={searchTerm} disabled />
           </Form.Item>
           <Form.Item name="name" label="Название" rules={[{ required: true }]}>
             <Input

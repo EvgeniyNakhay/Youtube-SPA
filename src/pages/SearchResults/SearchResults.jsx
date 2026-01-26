@@ -6,11 +6,11 @@ import {
   BarsOutlined,
 } from "@ant-design/icons";
 import MainHeader from "../../components/MainHeader/MainHeader";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModalWind from "../../components/ModalWind/ModalWind";
 import { useSelector } from "react-redux";
-// import VideoList from "../../components/VideosView/VideoList";
-// import VideoCards from "../../components/VideosView/VideoCards";
+import VideoList from "../../components/VideosView/VideoList";
+import VideoCards from "../../components/VideosView/VideoCards";
 // import { setIsModalOpen } from "../../redux/actions/isModalOpen";
 // import { setRequestedVideos } from "../../redux/actions/requestedVideos";
 // import { setSearchTerm } from "../../redux/actions/searchTermAction";
@@ -19,7 +19,7 @@ const { Content } = Layout;
 const { Search } = Input;
 
 const SearchResults = () => {
-  //   const [list, setList] = useState(true);
+  const [list, setList] = useState(true);
   //   const dispatch = useDispatch();
   //   const searchTerm = useSelector((store) => store.searchTerm);
   //   const { maxResult, sortByF } = useSelector((store) => store.activeFavRequest);
@@ -27,6 +27,8 @@ const SearchResults = () => {
   //   const requestedVideos = useSelector((store) => store.requestedVideos);
   const searchTerm = useSelector((store) => store.searchTerm.value);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [titles, setTitles] = useState([]);
+  const [images, setImages] = useState([]);
 
   //   const api_key = "AIzaSyDuSa_snfrqupxMfqRmOU_NaH7utQtq988";
   //   const video_http = "https://www.googleapis.com/youtube/v3/videos";
@@ -60,6 +62,26 @@ const SearchResults = () => {
   //         dispatch(setRequestedVideos(data.items));
   //       });
   //   }, [searchTerm]);
+
+  const dataUrl = "https://jsonplaceholder.typicode.com/users";
+  const imagesUrl = "https://dog.ceo/api/breeds/image/random";
+
+  const fetchData = () => {
+    fetch(dataUrl).then((response) =>
+      response.json().then((body) => setTitles(body)),
+    );
+  };
+
+  const fetchImages = () => {
+    fetch(imagesUrl).then((response) =>
+      response.json().then((body) => setImages(body)),
+    );
+  };
+
+  useEffect(() => {
+    fetchData();
+    fetchImages();
+  }, []);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -136,7 +158,7 @@ const SearchResults = () => {
               </span>
             </p>
             <Segmented
-              //   onChange={() => setList(!list)}
+              onChange={() => setList(!list)}
               options={[
                 {
                   value: "List",
@@ -149,7 +171,11 @@ const SearchResults = () => {
               ]}
             />
           </Content>
-          {/* {list ? <VideoList /> : <VideoCards />} */}
+          {list ? (
+            <VideoList titles={titles} images={images} />
+          ) : (
+            <VideoCards titles={titles} images={images} />
+          )}
         </Content>
       </Layout>
       {isModalOpen && (

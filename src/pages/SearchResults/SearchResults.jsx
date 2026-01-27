@@ -1,5 +1,4 @@
 import { Layout, Input, Segmented, Button, Modal } from "antd";
-// import React, { useState, useEffect } from "react";
 import {
   HeartOutlined,
   AppstoreOutlined,
@@ -12,9 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 import VideoList from "../../components/VideosView/VideoList";
 import VideoCards from "../../components/VideosView/VideoCards";
 import { setIsModalOpen } from "../../redux/slices/isModalOpenSlice";
-// import { setIsModalOpen } from "../../redux/actions/isModalOpen";
+import { setSearchTerm } from "../../redux/slices/searchTermSlice";
 // import { setRequestedVideos } from "../../redux/actions/requestedVideos";
-// import { setSearchTerm } from "../../redux/actions/searchTermAction";
 // import { fetchFromAPI } from "../../utils/fetchFromAPI";
 const { Content } = Layout;
 const { Search } = Input;
@@ -22,14 +20,13 @@ const { Search } = Input;
 const SearchResults = () => {
   const [list, setList] = useState(true);
   const dispatch = useDispatch();
-  //   const searchTerm = useSelector((store) => store.searchTerm);
   //   const { maxResult, sortByF } = useSelector((store) => store.activeFavRequest);
-  //   const [searchTermInput, setSearchTermInput] = useState(searchTerm);
   //   const requestedVideos = useSelector((store) => store.requestedVideos);
 
   const searchTerm = useSelector((store) => store.searchTerm.value);
   const isModalOpen = useSelector((store) => store.isModalOpen.value);
-  console.log(isModalOpen);
+
+  const [searchTermInput, setSearchTermInput] = useState(searchTerm);
   const [titles, setTitles] = useState([]);
   const [images, setImages] = useState([]);
 
@@ -90,9 +87,9 @@ const SearchResults = () => {
     dispatch(setIsModalOpen(true));
   };
 
-  //   const handleSearch = () => {
-  //     dispatch(setSearchTerm(searchTermInput));
-  //   };
+  const handleSearch = () => {
+    dispatch(setSearchTerm(searchTermInput));
+  };
 
   const suffix = (
     <HeartOutlined
@@ -128,9 +125,9 @@ const SearchResults = () => {
               enterButton="Найти"
               size="large"
               suffix={suffix}
-              value={searchTerm}
-              // onChange={(e) => setSearchTermInput(e.target.value)}
-              //   onSearch={handleSearch}
+              value={searchTermInput}
+              onChange={(e) => setSearchTermInput(e.target.value)}
+              onSearch={handleSearch}
             />
           </Content>
           <Content
@@ -149,7 +146,7 @@ const SearchResults = () => {
                 display: "flex",
               }}
             >
-              Видео по запросу "{searchTerm}""
+              Видео по запросу
               <span
                 style={{
                   fontWeight: "bold",
@@ -157,7 +154,7 @@ const SearchResults = () => {
                   marginBottom: 0,
                 }}
               >
-                {/* "{searchTerm}" */}
+                "{searchTerm}"
               </span>
             </p>
             <Segmented

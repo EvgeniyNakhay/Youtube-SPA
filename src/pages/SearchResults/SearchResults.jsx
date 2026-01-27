@@ -8,9 +8,10 @@ import {
 import MainHeader from "../../components/MainHeader/MainHeader";
 import { useEffect, useState } from "react";
 import ModalWind from "../../components/ModalWind/ModalWind";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import VideoList from "../../components/VideosView/VideoList";
 import VideoCards from "../../components/VideosView/VideoCards";
+import { setIsModalOpen } from "../../redux/slices/isModalOpenSlice";
 // import { setIsModalOpen } from "../../redux/actions/isModalOpen";
 // import { setRequestedVideos } from "../../redux/actions/requestedVideos";
 // import { setSearchTerm } from "../../redux/actions/searchTermAction";
@@ -20,13 +21,15 @@ const { Search } = Input;
 
 const SearchResults = () => {
   const [list, setList] = useState(true);
-  //   const dispatch = useDispatch();
+  const dispatch = useDispatch();
   //   const searchTerm = useSelector((store) => store.searchTerm);
   //   const { maxResult, sortByF } = useSelector((store) => store.activeFavRequest);
   //   const [searchTermInput, setSearchTermInput] = useState(searchTerm);
   //   const requestedVideos = useSelector((store) => store.requestedVideos);
+
   const searchTerm = useSelector((store) => store.searchTerm.value);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const isModalOpen = useSelector((store) => store.isModalOpen.value);
+  console.log(isModalOpen);
   const [titles, setTitles] = useState([]);
   const [images, setImages] = useState([]);
 
@@ -84,7 +87,7 @@ const SearchResults = () => {
   }, []);
 
   const showModal = () => {
-    setIsModalOpen(true);
+    dispatch(setIsModalOpen(true));
   };
 
   //   const handleSearch = () => {
@@ -178,9 +181,7 @@ const SearchResults = () => {
           )}
         </Content>
       </Layout>
-      {isModalOpen && (
-        <ModalWind isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
-      )}
+      {isModalOpen && <ModalWind />}
     </>
   );
 };

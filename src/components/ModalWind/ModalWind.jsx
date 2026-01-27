@@ -13,28 +13,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToFavourites } from "../../redux/slices/favouritesSlice";
 
 import { useState } from "react";
+import { setIsModalOpen } from "../../redux/slices/isModalOpenSlice";
 // import { setIsModalOpen } from "../../redux/actions/isModalOpen";
 // import { addToFavourites } from "../../redux/actions/favouritesAction";
 // import { setFavRequest } from "../../redux/actions/favRequest";
 
-const ModalWind = ({ isModalOpen, setIsModalOpen }) => {
+const ModalWind = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
+
   const [favouritesInput, setFavouritesInput] = useState("");
   //   const [sortByF, setSortByF] = useState("rating");
   //   const [maxResult, setMaxResult] = useState(12);
   const searchTerm = useSelector((store) => store.searchTerm.value);
-  //   const isModalOpen = useSelector((store) => store.isModalOpen);
-
-  //   const handleOk = () => {
-  //     dispatch(setFavRequest(favRequestInput));
-  //     dispatch(addToFavourites(searchTerm, favRequestInput, sortByF, maxResult));
-  //     dispatch(setIsModalOpen(false));
-  //   };
-
-  //   const handleCancel = () => {
-  //     dispatch(setIsModalOpen(false));
-  //   };
+  const isModalOpen = useSelector((store) => store.isModalOpen.value);
 
   //   const handleChangeSortBy = (value) => {
   //     setSortByF(value);
@@ -45,12 +37,14 @@ const ModalWind = ({ isModalOpen, setIsModalOpen }) => {
   //   };
 
   const handleOk = () => {
+    //     dispatch(setFavRequest(favRequestInput));
+    //     dispatch(addToFavourites(searchTerm, favRequestInput, sortByF, maxResult));
     dispatch(addToFavourites({ searchTerm, favouritesInput }));
-    setIsModalOpen(false);
+    dispatch(setIsModalOpen(false));
   };
 
   const handleCancel = () => {
-    setIsModalOpen(false);
+    dispatch(setIsModalOpen(false));
   };
 
   return (

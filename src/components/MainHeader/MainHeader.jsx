@@ -3,6 +3,8 @@ import logo from "./images/logo.svg";
 import "./style.css";
 
 import { Breadcrumb, Layout, Menu } from "antd";
+import { setSearchTerm } from "../../redux/slices/searchTermSlice";
+import { useDispatch } from "react-redux";
 
 const { Header, Content, Footer } = Layout;
 
@@ -13,9 +15,11 @@ const items = [
 ];
 const MainHeader = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleNavigateTo = (e) => {
     navigate(`${e.key}`);
+    dispatch(setSearchTerm(""));
   };
 
   return (

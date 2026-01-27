@@ -1,10 +1,10 @@
-import { Layout, List, Button } from "antd";
+import { Layout, List, Button, Empty } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 // import React, { useEffect, useState } from "react";
 import "./style.css";
 import MainHeader from "../../components/MainHeader/MainHeader";
+import { useSelector } from "react-redux";
 // import { useNavigate } from "react-router";
-// import { useDispatch, useSelector } from "react-redux";
 // import { setIsEditModalOpen } from "../../redux/actions/isEditModalOpen";
 // import EditModalWind from "../../components/ModalWind/EditModalWind";
 // import {
@@ -19,7 +19,8 @@ const { Content } = Layout;
 const Favourites = () => {
   // const navigate = useNavigate();
   //   const [requests, setRequests] = useState(null);
-  //   const favourites = useSelector((store) => store.favourites);
+  const favourites = useSelector((store) => store.favourites);
+  console.log(favourites);
   //   const isEditModalOpen = useSelector((store) => store.isEditModalOpen);
   //   const dispatch = useDispatch();
 
@@ -55,12 +56,21 @@ const Favourites = () => {
                 Избранное
               </h1>
             </Content>
-            <List
+            <div>
+              {favourites.length > 0 ? (
+                favourites.map((item) => {
+                  return <p key={item.id}>{item.favouriteRequestName}</p>;
+                })
+              ) : (
+                <Empty />
+              )}
+            </div>
+            {/* <List
               style={{
                 background: "#FFF",
               }}
               size="large"
-              //   dataSource={favourites}
+              dataSource={favourites}
               renderItem={(item) => (
                 <List.Item style={{ justifyContent: "space-between" }}>
                   <Button
@@ -102,7 +112,7 @@ const Favourites = () => {
                   </div>
                 </List.Item>
               )}
-            />
+            /> */}
           </Content>
           {/* {isEditModalOpen && <EditModalWind />} */}
         </>

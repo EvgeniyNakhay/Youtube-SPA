@@ -9,16 +9,18 @@ import {
   Slider,
   InputNumber,
 } from "antd";
-import { useSelector } from "react-redux";
-// import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToFavourites } from "../../redux/slices/favouritesSlice";
+
+import { useState } from "react";
 // import { setIsModalOpen } from "../../redux/actions/isModalOpen";
 // import { addToFavourites } from "../../redux/actions/favouritesAction";
 // import { setFavRequest } from "../../redux/actions/favRequest";
 
 const ModalWind = ({ isModalOpen, setIsModalOpen }) => {
   const [form] = Form.useForm();
-  //   const dispatch = useDispatch();
-  //   const [favRequestInput, setFavRequestInput] = useState("");
+  const dispatch = useDispatch();
+  const [favouritesInput, setFavouritesInput] = useState("");
   //   const [sortByF, setSortByF] = useState("rating");
   //   const [maxResult, setMaxResult] = useState(12);
   const searchTerm = useSelector((store) => store.searchTerm.value);
@@ -43,11 +45,8 @@ const ModalWind = ({ isModalOpen, setIsModalOpen }) => {
   //   };
 
   const handleOk = () => {
-    // setLoading(true);
-    // setTimeout(() => {
-    //   setLoading(false);
-    //   setOpen(false);
-    // }, 3000);
+    dispatch(addToFavourites({ searchTerm, favouritesInput }));
+    setIsModalOpen(false);
   };
 
   const handleCancel = () => {
@@ -63,7 +62,7 @@ const ModalWind = ({ isModalOpen, setIsModalOpen }) => {
       onOk={handleOk}
       onCancel={handleCancel}
       footer={[
-        <Button key="back" onClick={handleCancel}>
+        <Button key="back" onClick={handleOk}>
           Сохранить
         </Button>,
         <Button
@@ -91,7 +90,8 @@ const ModalWind = ({ isModalOpen, setIsModalOpen }) => {
             <Input
               placeholder="Укажите название"
               rules={[{ required: true }]}
-              // onChange={(e) => setFavRequestInput(e.target.value)}
+              onChange={(e) => setFavouritesInput(e.target.value)}
+              value={favouritesInput}
             />
           </Form.Item>
           <Form.Item label="Сортировать по">

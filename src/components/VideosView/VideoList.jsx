@@ -3,8 +3,6 @@ import "./VideoList.css";
 
 const VideoList = ({ titles, images }) => {
   // const requestedVideos = useSelector((store) => store.requestedVideos);
-  console.log(titles);
-  console.log(images);
 
   return (
     <div className="video-list-container">

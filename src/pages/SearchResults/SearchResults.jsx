@@ -146,7 +146,7 @@ const SearchResults = () => {
                 display: "flex",
               }}
             >
-              Видео по запросу{" "}
+              Видео по запросу "{searchTerm}""
               <span
                 style={{
                   fontWeight: "bold",

@@ -56,10 +56,58 @@ const Favourites = () => {
                 Избранное
               </h1>
             </Content>
-            <div>
+            <div
+              style={{
+                background: "#FFF",
+              }}
+            >
               {favourites.length > 0 ? (
                 favourites.map((item) => {
-                  return <p key={item.id}>{item.favouriteRequestName}</p>;
+                  return (
+                    <>
+                      <div
+                        style={{
+                          marginBlock: "10px",
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <button
+                          type="text"
+                          style={{
+                            fontWeight: 500,
+                            color: "#000000",
+                            padding: 0,
+                          }}
+                          key={item.id}
+                        >
+                          {item.favouriteRequestName}
+                        </button>
+                        <div>
+                          <Button
+                            // onClick={() =>
+                            //   handleEdit(
+                            //     item.id,
+                            //     item.searchTerm,
+                            //     item.favRequest,
+                            //     item.sortByF,
+                            //     item.maxResult,
+                            //   )
+                            // }
+                            style={{ marginLeft: 20 }}
+                            type="primary"
+                            icon={<EditOutlined />}
+                          />
+                          <Button
+                            // onClick={() => dispatch(deleteFavRequest(item.id))}
+                            style={{ marginLeft: 20 }}
+                            type="primary"
+                            icon={<DeleteOutlined />}
+                          />
+                        </div>
+                      </div>
+                    </>
+                  );
                 })
               ) : (
                 <Empty />

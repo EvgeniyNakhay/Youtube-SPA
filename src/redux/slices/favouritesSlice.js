@@ -13,8 +13,13 @@ const favouritesSlice = createSlice({
         favouriteRequestName: action.payload.favouritesInput,
       });
     },
+    removeFavourite(state, action) {
+      return (state = state.filter((item) => {
+        item.id !== action.payload;
+      }));
+    },
   },
 });
 
-export const { addToFavourites } = favouritesSlice.actions;
+export const { addToFavourites, removeFavourite } = favouritesSlice.actions;
 export default favouritesSlice.reducer;

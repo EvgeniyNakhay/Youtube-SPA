@@ -3,7 +3,8 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 // import React, { useEffect, useState } from "react";
 import "./style.css";
 import MainHeader from "../../components/MainHeader/MainHeader";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { removeFavourite } from "../../redux/slices/favouritesSlice";
 // import { useNavigate } from "react-router";
 // import { setIsEditModalOpen } from "../../redux/actions/isEditModalOpen";
 // import EditModalWind from "../../components/ModalWind/EditModalWind";
@@ -18,11 +19,10 @@ const { Content } = Layout;
 
 const Favourites = () => {
   // const navigate = useNavigate();
+  const dispatch = useDispatch();
   //   const [requests, setRequests] = useState(null);
   const favourites = useSelector((store) => store.favourites);
-  console.log(favourites);
   //   const isEditModalOpen = useSelector((store) => store.isEditModalOpen);
-  //   const dispatch = useDispatch();
 
   //   const handleEdit = (id, searchTerm, favRequest, sortByF, maxResult) => {
   //     dispatch(activeFavRequest(id, searchTerm, favRequest, sortByF, maxResult));
@@ -64,49 +64,47 @@ const Favourites = () => {
               {favourites.length > 0 ? (
                 favourites.map((item) => {
                   return (
-                    <>
-                      <div
+                    <div
+                      key={item.id}
+                      style={{
+                        marginBlock: "10px",
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <button
+                        type="text"
                         style={{
-                          marginBlock: "10px",
-                          display: "flex",
-                          justifyContent: "space-between",
+                          fontWeight: 500,
+                          color: "#000000",
+                          padding: 0,
                         }}
                       >
-                        <button
-                          type="text"
-                          style={{
-                            fontWeight: 500,
-                            color: "#000000",
-                            padding: 0,
-                          }}
-                          key={item.id}
-                        >
-                          {item.favouriteRequestName}
-                        </button>
-                        <div>
-                          <Button
-                            // onClick={() =>
-                            //   handleEdit(
-                            //     item.id,
-                            //     item.searchTerm,
-                            //     item.favRequest,
-                            //     item.sortByF,
-                            //     item.maxResult,
-                            //   )
-                            // }
-                            style={{ marginLeft: 20 }}
-                            type="primary"
-                            icon={<EditOutlined />}
-                          />
-                          <Button
-                            // onClick={() => dispatch(deleteFavRequest(item.id))}
-                            style={{ marginLeft: 20 }}
-                            type="primary"
-                            icon={<DeleteOutlined />}
-                          />
-                        </div>
+                        {item.favouriteRequestName}
+                      </button>
+                      <div>
+                        <Button
+                          // onClick={() =>
+                          //   handleEdit(
+                          //     item.id,
+                          //     item.searchTerm,
+                          //     item.favRequest,
+                          //     item.sortByF,
+                          //     item.maxResult,
+                          //   )
+                          // }
+                          style={{ marginLeft: 20 }}
+                          type="primary"
+                          icon={<EditOutlined />}
+                        />
+                        <Button
+                          onClick={() => dispatch(removeFavourite(item.id))}
+                          style={{ marginLeft: 20 }}
+                          type="primary"
+                          icon={<DeleteOutlined />}
+                        />
                       </div>
-                    </>
+                    </div>
                   );
                 })
               ) : (

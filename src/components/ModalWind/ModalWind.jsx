@@ -50,7 +50,6 @@ const ModalWind = () => {
   return (
     <Modal
       title="Сохранить запрос"
-      closable={{ "aria-label": "Custom Close Button" }}
       centered
       open={isModalOpen}
       onOk={handleOk}

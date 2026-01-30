@@ -19,7 +19,7 @@ const Favourites = () => {
   const dispatch = useDispatch();
   //   const [requests, setRequests] = useState(null);
   const favourites = useSelector((store) => store.favourites);
-  const isEditModalOpen = useSelector((store) => store.isEditModalOpen);
+  const isEditModalOpen = useSelector((store) => store.isEditModalOpen.value);
 
   // const handleEdit = (id, searchTerm, favRequest, sortByF, maxResult) => {
   //   // dispatch(activeFavRequest(id, searchTerm, favRequest, sortByF, maxResult));
@@ -113,9 +113,9 @@ const Favourites = () => {
               )}
             </div>
           </Content>
-          {isEditModalOpen && <EditModalWind />}
         </>
       </Layout>
+      {isEditModalOpen && <EditModalWind />}
     </>
   );
 };

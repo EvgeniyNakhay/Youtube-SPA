@@ -55,8 +55,8 @@ const EditModalWind = () => {
 
   return (
     <Modal
-      style={{ textAlign: "center" }}
       title="Изменить запрос"
+      centered
       open={isModalOpen}
       onOk={handleOk}
       onCancel={handleCancel}

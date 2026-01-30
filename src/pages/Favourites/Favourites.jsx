@@ -1,17 +1,14 @@
-import { Layout, List, Button, Empty } from "antd";
+import { Layout, Button, Empty } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { useSelector, useDispatch } from "react-redux";
+
 // import React, { useEffect, useState } from "react";
 import "./style.css";
 import MainHeader from "../../components/MainHeader/MainHeader";
-import { useSelector, useDispatch } from "react-redux";
+import EditModalWind from "../../components/ModalWind/EditModalWind";
 import { removeFavourite } from "../../redux/slices/favouritesSlice";
 // import { useNavigate } from "react-router";
-// import { setIsEditModalOpen } from "../../redux/actions/isEditModalOpen";
-// import EditModalWind from "../../components/ModalWind/EditModalWind";
-// import {
-//   addToFavourites,
-//   deleteFavRequest,
-// } from "../../redux/actions/favouritesAction";
+import { setIsEditModalOpen } from "../../redux/slices/isEditModalOpenSlice";
 // import { activeFavRequest } from "../../redux/actions/activeFavRequest";
 // import { NavLink } from "react-router-dom";
 // import { setSearchTerm } from "../../redux/actions/searchTermAction";
@@ -22,12 +19,16 @@ const Favourites = () => {
   const dispatch = useDispatch();
   //   const [requests, setRequests] = useState(null);
   const favourites = useSelector((store) => store.favourites);
-  //   const isEditModalOpen = useSelector((store) => store.isEditModalOpen);
+  const isEditModalOpen = useSelector((store) => store.isEditModalOpen);
 
-  //   const handleEdit = (id, searchTerm, favRequest, sortByF, maxResult) => {
-  //     dispatch(activeFavRequest(id, searchTerm, favRequest, sortByF, maxResult));
-  //     // dispatch(setIsEditModalOpen(true));
-  //   };
+  // const handleEdit = (id, searchTerm, favRequest, sortByF, maxResult) => {
+  //   // dispatch(activeFavRequest(id, searchTerm, favRequest, sortByF, maxResult));
+  //   dispatch(setIsEditModalOpen(true));
+  // };
+
+  const handleEdit = () => {
+    dispatch(setIsEditModalOpen(true));
+  };
 
   //   const searchFavRequest = (id, searchTerm, favRequest, sortByF, maxResult) => {
   //     dispatch(activeFavRequest(id, searchTerm, favRequest, sortByF, maxResult));
@@ -84,15 +85,15 @@ const Favourites = () => {
                       </button>
                       <div>
                         <Button
-                          // onClick={() =>
-                          //   handleEdit(
-                          //     item.id,
-                          //     item.searchTerm,
-                          //     item.favRequest,
-                          //     item.sortByF,
-                          //     item.maxResult,
-                          //   )
-                          // }
+                          onClick={() =>
+                            handleEdit(
+                              item.id,
+                              item.searchTerm,
+                              item.favRequest,
+                              item.sortByF,
+                              item.maxResult,
+                            )
+                          }
                           style={{ marginLeft: 20 }}
                           type="primary"
                           icon={<EditOutlined />}
@@ -111,56 +112,8 @@ const Favourites = () => {
                 <Empty />
               )}
             </div>
-            {/* <List
-              style={{
-                background: "#FFF",
-              }}
-              size="large"
-              dataSource={favourites}
-              renderItem={(item) => (
-                <List.Item style={{ justifyContent: "space-between" }}>
-                  <Button
-                    type="text"
-                    style={{ fontWeight: 500, color: "#000000", padding: 0 }}
-                    // onClick={() =>
-                    //   searchFavRequest(
-                    //     item.id,
-                    //     item.searchTerm,
-                    //     item.favRequest,
-                    //     item.sortByF,
-                    //     item.maxResult
-                    //   )
-                    // }
-                  >
-                    {item.favRequest}
-                  </Button>
-                  <div>
-                    <Button
-                      //   onClick={() =>
-                      //     handleEdit(
-                      //       item.id,
-                      //       item.searchTerm,
-                      //       item.favRequest,
-                      //       item.sortByF,
-                      //       item.maxResult
-                      //     )
-                      //   }
-                      style={{ marginLeft: 20 }}
-                      type="primary"
-                      icon={<EditOutlined />}
-                    />
-                    <Button
-                      //   onClick={() => dispatch(deleteFavRequest(item.id))}
-                      style={{ marginLeft: 20 }}
-                      type="primary"
-                      icon={<DeleteOutlined />}
-                    />
-                  </div>
-                </List.Item>
-              )}
-            /> */}
           </Content>
-          {/* {isEditModalOpen && <EditModalWind />} */}
+          {isEditModalOpen && <EditModalWind />}
         </>
       </Layout>
     </>

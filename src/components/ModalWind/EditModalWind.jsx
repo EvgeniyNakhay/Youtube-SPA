@@ -9,35 +9,35 @@ import {
   Slider,
   InputNumber,
 } from "antd";
-import { useState } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
-import { setIsEditModalOpen } from "../../redux/actions/isEditModalOpen";
-import { saveEditedFavRequest } from "../../redux/actions/favouritesAction";
+// import { saveEditedFavRequest } from "../../redux/actions/favouritesAction";
+import { setIsEditModalOpen } from "../../redux/slices/isEditModalOpenSlice";
 
 const EditModalWind = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const isModalOpen = useSelector((store) => store.isEditModalOpen);
-  const { id, searchTerm, favRequest, sortByF, maxResult } = useSelector(
-    (store) => store.activeFavRequest
-  );
-  const [editedSearchTermInput, setEditedSearchTermInput] =
-    useState(searchTerm);
-  const [editedFavRequestInput, setEditedFavRequestInput] =
-    useState(favRequest);
-  const [editedSortByF, setEditedSortByF] = useState(sortByF);
-  const [editedMaxResult, setEditedMaxResult] = useState(maxResult);
+  // const { id, searchTerm, favRequest, sortByF, maxResult } = useSelector(
+  //   (store) => store.activeFavRequest,
+  // );
+  // const [editedSearchTermInput, setEditedSearchTermInput] =
+  //   useState(searchTerm);
+  // const [editedFavRequestInput, setEditedFavRequestInput] =
+  //   useState(favRequest);
+  // const [editedSortByF, setEditedSortByF] = useState(sortByF);
+  // const [editedMaxResult, setEditedMaxResult] = useState(maxResult);
 
   const handleOk = () => {
-    dispatch(
-      saveEditedFavRequest(
-        id,
-        editedSearchTermInput,
-        editedFavRequestInput,
-        editedSortByF,
-        editedMaxResult
-      )
-    );
+    // dispatch(
+    //   saveEditedFavRequest(
+    //     id,
+    //     editedSearchTermInput,
+    //     editedFavRequestInput,
+    //     editedSortByF,
+    //     editedMaxResult,
+    //   ),
+    // );
     dispatch(setIsEditModalOpen(false));
   };
 
@@ -45,13 +45,13 @@ const EditModalWind = () => {
     dispatch(setIsEditModalOpen(false));
   };
 
-  const handleChangeSortBy = (value) => {
-    setEditedSortByF(value);
-  };
+  // const handleChangeSortBy = (value) => {
+  //   setEditedSortByF(value);
+  // };
 
-  const handleChangeMaxResult = (newValue) => {
-    setEditedMaxResult(newValue);
-  };
+  // const handleChangeMaxResult = (newValue) => {
+  //   setEditedMaxResult(newValue);
+  // };
 
   return (
     <Modal
@@ -78,21 +78,21 @@ const EditModalWind = () => {
       >
         <Form.Item label="Запрос">
           <Input
-            value={editedSearchTermInput}
-            onChange={(e) => setEditedSearchTermInput(e.target.value)}
+          // value={editedSearchTermInput}
+          // onChange={(e) => setEditedSearchTermInput(e.target.value)}
           />
         </Form.Item>
         <Form.Item label="Название" rules={[{ required: true }]}>
           <Input
-            value={editedFavRequestInput}
-            onChange={(e) => setEditedFavRequestInput(e.target.value)}
+          // value={editedFavRequestInput}
+          // onChange={(e) => setEditedFavRequestInput(e.target.value)}
           />
         </Form.Item>
         <Form.Item label="Сортировать по" rules={[{ required: true }]}>
           <Select
             style={{ textAlign: "left" }}
-            value={editedSortByF}
-            onChange={handleChangeSortBy}
+            // value={editedSortByF}
+            // onChange={handleChangeSortBy}
             options={[
               {
                 value: "unsorted",
@@ -143,8 +143,8 @@ const EditModalWind = () => {
                   marginTop: "12px",
                   marginLeft: "0",
                 }}
-                onChange={handleChangeMaxResult}
-                value={editedMaxResult}
+                // onChange={handleChangeMaxResult}
+                // value={editedMaxResult}
               />
             </Col>
             <Col span={5}>
@@ -154,8 +154,8 @@ const EditModalWind = () => {
                 style={{
                   margin: "0 9px",
                 }}
-                value={editedMaxResult}
-                onChange={handleChangeMaxResult}
+                // value={editedMaxResult}
+                // onChange={handleChangeMaxResult}
               />
             </Col>
           </Row>

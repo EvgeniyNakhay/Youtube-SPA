@@ -13,18 +13,21 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 // import { saveEditedFavRequest } from "../../redux/actions/favouritesAction";
 import { setIsEditModalOpen } from "../../redux/slices/isEditModalOpenSlice";
+import { useState } from "react";
 
 const EditModalWind = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const isModalOpen = useSelector((store) => store.isEditModalOpen);
-  // const { id, searchTerm, favRequest, sortByF, maxResult } = useSelector(
-  //   (store) => store.activeFavRequest,
-  // );
-  // const [editedSearchTermInput, setEditedSearchTermInput] =
-  //   useState(searchTerm);
-  // const [editedFavRequestInput, setEditedFavRequestInput] =
-  //   useState(favRequest);
+  const { searchTerm, favouriteRequestName } = useSelector(
+    (store) => store.activeFavourite,
+  );
+
+  console.log(searchTerm);
+  const [editedSearchTermInput, setEditedSearchTermInput] =
+    useState(searchTerm);
+  const [editedFavRequestInput, setEditedFavRequestInput] =
+    useState(favouriteRequestName);
   // const [editedSortByF, setEditedSortByF] = useState(sortByF);
   // const [editedMaxResult, setEditedMaxResult] = useState(maxResult);
 
@@ -62,10 +65,10 @@ const EditModalWind = () => {
       onCancel={handleCancel}
       footer={[
         <Button key="back" onClick={handleCancel}>
-          Не сохранять
+          Не изменять
         </Button>,
         <Button key="submit" type="primary" onClick={handleOk}>
-          Сохранить
+          Изменить
         </Button>,
       ]}
     >
@@ -78,14 +81,14 @@ const EditModalWind = () => {
       >
         <Form.Item label="Запрос">
           <Input
-          // value={editedSearchTermInput}
-          // onChange={(e) => setEditedSearchTermInput(e.target.value)}
+            value={editedSearchTermInput}
+            onChange={(e) => setEditedSearchTermInput(e.target.value)}
           />
         </Form.Item>
         <Form.Item label="Название" rules={[{ required: true }]}>
           <Input
-          // value={editedFavRequestInput}
-          // onChange={(e) => setEditedFavRequestInput(e.target.value)}
+            value={editedFavRequestInput}
+            onChange={(e) => setEditedFavRequestInput(e.target.value)}
           />
         </Form.Item>
         <Form.Item label="Сортировать по" rules={[{ required: true }]}>

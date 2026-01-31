@@ -9,7 +9,7 @@ import EditModalWind from "../../components/ModalWind/EditModalWind";
 import { removeFavourite } from "../../redux/slices/favouritesSlice";
 // import { useNavigate } from "react-router";
 import { setIsEditModalOpen } from "../../redux/slices/isEditModalOpenSlice";
-// import { activeFavRequest } from "../../redux/actions/activeFavRequest";
+import { activeFavourite } from "../../redux/slices/activeFavouriteSlice";
 // import { NavLink } from "react-router-dom";
 // import { setSearchTerm } from "../../redux/actions/searchTermAction";
 const { Content } = Layout;
@@ -26,8 +26,9 @@ const Favourites = () => {
   //   dispatch(setIsEditModalOpen(true));
   // };
 
-  const handleEdit = () => {
+  const handleEdit = (id, searchTerm, favouriteRequestName) => {
     dispatch(setIsEditModalOpen(true));
+    dispatch(activeFavourite({ id, searchTerm, favouriteRequestName }));
   };
 
   //   const searchFavRequest = (id, searchTerm, favRequest, sortByF, maxResult) => {
@@ -89,9 +90,7 @@ const Favourites = () => {
                             handleEdit(
                               item.id,
                               item.searchTerm,
-                              item.favRequest,
-                              item.sortByF,
-                              item.maxResult,
+                              item.favouriteRequestName,
                             )
                           }
                           style={{ marginLeft: 20 }}

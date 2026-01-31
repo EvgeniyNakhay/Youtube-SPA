@@ -3,6 +3,7 @@ import searchTermReducer from "./slices/searchTermSlice";
 import favouritesReducer from "./slices/favouritesSlice";
 import isModalOpenReducer from "./slices/isModalOpenSlice";
 import isEditModalOpenReducer from "./slices/isEditModalOpenSlice";
+import activeFavouriteReducer from "./slices/activeFavouriteSlice";
 
 const store = configureStore({
   reducer: combineReducers({
@@ -10,6 +11,7 @@ const store = configureStore({
     favourites: favouritesReducer,
     isModalOpen: isModalOpenReducer,
     isEditModalOpen: isEditModalOpenReducer,
+    activeFavourite: activeFavouriteReducer,
   }),
 });
 

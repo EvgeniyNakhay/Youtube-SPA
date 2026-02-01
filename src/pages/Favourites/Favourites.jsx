@@ -17,6 +17,7 @@ const { Content } = Layout;
 const Favourites = () => {
   // const navigate = useNavigate();
   const dispatch = useDispatch();
+
   //   const [requests, setRequests] = useState(null);
   const favourites = useSelector((store) => store.favourites);
   const isEditModalOpen = useSelector((store) => store.isEditModalOpen.value);
@@ -26,9 +27,11 @@ const Favourites = () => {
   //   dispatch(setIsEditModalOpen(true));
   // };
 
-  const handleEdit = (id, searchTerm, favouriteRequestName) => {
+  const handleEdit = (id, searchTerm, favouriteRequestName, sortByF) => {
     dispatch(setIsEditModalOpen(true));
-    dispatch(activeFavourite({ id, searchTerm, favouriteRequestName }));
+    dispatch(
+      activeFavourite({ id, searchTerm, favouriteRequestName, sortByF }),
+    );
   };
 
   //   const searchFavRequest = (id, searchTerm, favRequest, sortByF, maxResult) => {
@@ -91,6 +94,7 @@ const Favourites = () => {
                               item.id,
                               item.searchTerm,
                               item.favouriteRequestName,
+                              item.sortByF,
                             )
                           }
                           style={{ marginLeft: 20 }}

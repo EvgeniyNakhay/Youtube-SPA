@@ -23,14 +23,15 @@ const ModalWind = () => {
   const dispatch = useDispatch();
 
   const [favouritesInput, setFavouritesInput] = useState("");
-  //   const [sortByF, setSortByF] = useState("rating");
+  const [sortByF, setSortByF] = useState("rating");
   //   const [maxResult, setMaxResult] = useState(12);
+
   const searchTerm = useSelector((store) => store.searchTerm.value);
   const isModalOpen = useSelector((store) => store.isModalOpen.value);
 
-  //   const handleChangeSortBy = (value) => {
-  //     setSortByF(value);
-  //   };
+  const handleChangeSortBy = (value) => {
+    setSortByF(value);
+  };
 
   //   const handleChangeMaxResult = (newValue) => {
   //     setMaxResult(newValue);
@@ -39,7 +40,7 @@ const ModalWind = () => {
   const handleOk = () => {
     //     dispatch(setFavRequest(favRequestInput));
     //     dispatch(addToFavourites(searchTerm, favRequestInput, sortByF, maxResult));
-    dispatch(addToFavourites({ searchTerm, favouritesInput }));
+    dispatch(addToFavourites({ searchTerm, favouritesInput, sortByF }));
     dispatch(setIsModalOpen(false));
   };
 
@@ -90,8 +91,8 @@ const ModalWind = () => {
           <Form.Item label="Сортировать по">
             <Select
               style={{ textAlign: "left" }}
-              // value={sortByF}
-              // onChange={handleChangeSortBy}
+              value={sortByF}
+              onChange={handleChangeSortBy}
               defaultValue="unsorted"
               options={[
                 {

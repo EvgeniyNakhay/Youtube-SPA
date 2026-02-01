@@ -11,6 +11,7 @@ const favouritesSlice = createSlice({
         id: crypto.randomUUID(),
         searchTerm: action.payload.searchTerm,
         favouriteRequestName: action.payload.favouritesInput,
+        sortByF: action.payload.sortByF,
       });
     },
     removeFavourite(state, action) {

@@ -17,18 +17,20 @@ import { useState } from "react";
 
 const EditModalWind = () => {
   const [form] = Form.useForm();
+
   const dispatch = useDispatch();
+
   const isModalOpen = useSelector((store) => store.isEditModalOpen);
-  const { searchTerm, favouriteRequestName } = useSelector(
+  const { searchTerm, favouriteRequestName, sortByF } = useSelector(
     (store) => store.activeFavourite,
   );
 
-  console.log(searchTerm);
   const [editedSearchTermInput, setEditedSearchTermInput] =
     useState(searchTerm);
   const [editedFavRequestInput, setEditedFavRequestInput] =
     useState(favouriteRequestName);
-  // const [editedSortByF, setEditedSortByF] = useState(sortByF);
+  const [editedSortByF, setEditedSortByF] = useState(sortByF);
+
   // const [editedMaxResult, setEditedMaxResult] = useState(maxResult);
 
   const handleOk = () => {
@@ -48,9 +50,9 @@ const EditModalWind = () => {
     dispatch(setIsEditModalOpen(false));
   };
 
-  // const handleChangeSortBy = (value) => {
-  //   setEditedSortByF(value);
-  // };
+  const handleChangeSortBy = (value) => {
+    setEditedSortByF(value);
+  };
 
   // const handleChangeMaxResult = (newValue) => {
   //   setEditedMaxResult(newValue);
@@ -94,8 +96,8 @@ const EditModalWind = () => {
         <Form.Item label="Сортировать по" rules={[{ required: true }]}>
           <Select
             style={{ textAlign: "left" }}
-            // value={editedSortByF}
-            // onChange={handleChangeSortBy}
+            value={editedSortByF}
+            onChange={handleChangeSortBy}
             options={[
               {
                 value: "unsorted",

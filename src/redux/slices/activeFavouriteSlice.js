@@ -4,6 +4,7 @@ const initialState = {
   id: "",
   searchTerm: "",
   favouriteRequestName: "",
+  sortByF: "",
 };
 
 const activeFavouriteSlice = createSlice({
@@ -13,6 +14,7 @@ const activeFavouriteSlice = createSlice({
     activeFavourite(state, action) {
       state.searchTerm = action.payload.searchTerm;
       state.favouriteRequestName = action.payload.favouriteRequestName;
+      state.sortByF = action.payload.sortByF;
     },
   },
 });

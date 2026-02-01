@@ -11,9 +11,9 @@ import {
 } from "antd";
 
 import { useDispatch, useSelector } from "react-redux";
-// import { saveEditedFavRequest } from "../../redux/actions/favouritesAction";
 import { setIsEditModalOpen } from "../../redux/slices/isEditModalOpenSlice";
 import { useState } from "react";
+import { saveEditedFavRequest } from "../../redux/slices/favouritesSlice";
 
 const EditModalWind = () => {
   const [form] = Form.useForm();
@@ -21,9 +21,8 @@ const EditModalWind = () => {
   const dispatch = useDispatch();
 
   const isModalOpen = useSelector((store) => store.isEditModalOpen);
-  const { searchTerm, favouriteRequestName, sortByF, maxResult } = useSelector(
-    (store) => store.activeFavourite,
-  );
+  const { id, searchTerm, favouriteRequestName, sortByF, maxResult } =
+    useSelector((store) => store.activeFavourite);
 
   const [editedSearchTermInput, setEditedSearchTermInput] =
     useState(searchTerm);
@@ -33,15 +32,15 @@ const EditModalWind = () => {
   const [editedMaxResult, setEditedMaxResult] = useState(maxResult);
 
   const handleOk = () => {
-    // dispatch(
-    //   saveEditedFavRequest(
-    //     id,
-    //     editedSearchTermInput,
-    //     editedFavRequestInput,
-    //     editedSortByF,
-    //     editedMaxResult,
-    //   ),
-    // );
+    dispatch(
+      saveEditedFavRequest({
+        id,
+        editedSearchTermInput,
+        editedFavRequestInput,
+        editedSortByF,
+        editedMaxResult,
+      }),
+    );
     dispatch(setIsEditModalOpen(false));
   };
 

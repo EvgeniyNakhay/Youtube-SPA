@@ -13,6 +13,7 @@ const activeFavouriteSlice = createSlice({
   initialState,
   reducers: {
     activeFavourite(state, action) {
+      state.id = action.payload.id;
       state.searchTerm = action.payload.searchTerm;
       state.favouriteRequestName = action.payload.favouriteRequestName;
       state.sortByF = action.payload.sortByF;

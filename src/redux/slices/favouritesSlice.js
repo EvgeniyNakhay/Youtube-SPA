@@ -20,8 +20,21 @@ const favouritesSlice = createSlice({
         item.id !== action.payload;
       }));
     },
+    saveEditedFavRequest(state, action) {
+      const editedFavourite = state.findIndex(
+        (item) => item.id === action.payload.id,
+      );
+      console.log(state[editedFavourite]);
+
+      state[editedFavourite].searchTerm = action.payload.editedSearchTermInput;
+      state[editedFavourite].favouriteRequestName =
+        action.payload.editedFavRequestInput;
+      state[editedFavourite].sortByF = action.payload.editedSortByF;
+      state[editedFavourite].maxResult = action.payload.editedMaxResult;
+    },
   },
 });
 
-export const { addToFavourites, removeFavourite } = favouritesSlice.actions;
+export const { addToFavourites, removeFavourite, saveEditedFavRequest } =
+  favouritesSlice.actions;
 export default favouritesSlice.reducer;

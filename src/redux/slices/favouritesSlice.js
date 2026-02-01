@@ -12,6 +12,7 @@ const favouritesSlice = createSlice({
         searchTerm: action.payload.searchTerm,
         favouriteRequestName: action.payload.favouritesInput,
         sortByF: action.payload.sortByF,
+        maxResult: action.payload.maxResult,
       });
     },
     removeFavourite(state, action) {

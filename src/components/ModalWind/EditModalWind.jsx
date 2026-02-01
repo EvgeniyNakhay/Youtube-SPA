@@ -21,7 +21,7 @@ const EditModalWind = () => {
   const dispatch = useDispatch();
 
   const isModalOpen = useSelector((store) => store.isEditModalOpen);
-  const { searchTerm, favouriteRequestName, sortByF } = useSelector(
+  const { searchTerm, favouriteRequestName, sortByF, maxResult } = useSelector(
     (store) => store.activeFavourite,
   );
 
@@ -30,8 +30,7 @@ const EditModalWind = () => {
   const [editedFavRequestInput, setEditedFavRequestInput] =
     useState(favouriteRequestName);
   const [editedSortByF, setEditedSortByF] = useState(sortByF);
-
-  // const [editedMaxResult, setEditedMaxResult] = useState(maxResult);
+  const [editedMaxResult, setEditedMaxResult] = useState(maxResult);
 
   const handleOk = () => {
     // dispatch(
@@ -54,9 +53,9 @@ const EditModalWind = () => {
     setEditedSortByF(value);
   };
 
-  // const handleChangeMaxResult = (newValue) => {
-  //   setEditedMaxResult(newValue);
-  // };
+  const handleChangeMaxResult = (newValue) => {
+    setEditedMaxResult(newValue);
+  };
 
   return (
     <Modal
@@ -148,8 +147,8 @@ const EditModalWind = () => {
                   marginTop: "12px",
                   marginLeft: "0",
                 }}
-                // onChange={handleChangeMaxResult}
-                // value={editedMaxResult}
+                onChange={handleChangeMaxResult}
+                value={editedMaxResult}
               />
             </Col>
             <Col span={5}>
@@ -159,8 +158,8 @@ const EditModalWind = () => {
                 style={{
                   margin: "0 9px",
                 }}
-                // value={editedMaxResult}
-                // onChange={handleChangeMaxResult}
+                value={editedMaxResult}
+                onChange={handleChangeMaxResult}
               />
             </Col>
           </Row>

@@ -27,10 +27,22 @@ const Favourites = () => {
   //   dispatch(setIsEditModalOpen(true));
   // };
 
-  const handleEdit = (id, searchTerm, favouriteRequestName, sortByF) => {
+  const handleEdit = (
+    id,
+    searchTerm,
+    favouriteRequestName,
+    sortByF,
+    maxResult,
+  ) => {
     dispatch(setIsEditModalOpen(true));
     dispatch(
-      activeFavourite({ id, searchTerm, favouriteRequestName, sortByF }),
+      activeFavourite({
+        id,
+        searchTerm,
+        favouriteRequestName,
+        sortByF,
+        maxResult,
+      }),
     );
   };
 
@@ -95,6 +107,7 @@ const Favourites = () => {
                               item.searchTerm,
                               item.favouriteRequestName,
                               item.sortByF,
+                              item.maxResult,
                             )
                           }
                           style={{ marginLeft: 20 }}

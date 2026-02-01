@@ -1,0 +1,26 @@
+.layout {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-label {
+  text-align: center;
+  margin: 20px;
+}
+
+.login-form {
+  padding: 50px 88px 60px 88px;
+  margin-bottom: 20px;
+}
+
+.login-form-item {
+  width: 100%;
+}
+
+.login-form-button {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}

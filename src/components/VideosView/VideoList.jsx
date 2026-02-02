@@ -8,7 +8,6 @@ const VideoList = ({ titles, images }) => {
     <div className="video-list-container">
       {titles &&
         titles.map((item) => (
-          // <div className="video-list" key={item.id.videoId}>
           <div className="video-list" key={item.id}>
             <img
               // src={item.snippet?.thumbnails?.high?.url}

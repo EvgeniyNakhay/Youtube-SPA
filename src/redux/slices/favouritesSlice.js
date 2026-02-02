@@ -17,14 +17,13 @@ const favouritesSlice = createSlice({
     },
     removeFavourite(state, action) {
       return (state = state.filter((item) => {
-        item.id !== action.payload;
+        return item.id !== action.payload;
       }));
     },
     saveEditedFavRequest(state, action) {
       const editedFavourite = state.findIndex(
         (item) => item.id === action.payload.id,
       );
-      console.log(state[editedFavourite]);
 
       state[editedFavourite].searchTerm = action.payload.editedSearchTermInput;
       state[editedFavourite].favouriteRequestName =

@@ -22,11 +22,6 @@ const Favourites = () => {
   const favourites = useSelector((store) => store.favourites);
   const isEditModalOpen = useSelector((store) => store.isEditModalOpen.value);
 
-  // const handleEdit = (id, searchTerm, favRequest, sortByF, maxResult) => {
-  //   // dispatch(activeFavRequest(id, searchTerm, favRequest, sortByF, maxResult));
-  //   dispatch(setIsEditModalOpen(true));
-  // };
-
   const handleEdit = (
     id,
     searchTerm,
@@ -34,7 +29,6 @@ const Favourites = () => {
     sortByF,
     maxResult,
   ) => {
-    dispatch(setIsEditModalOpen(true));
     dispatch(
       activeFavourite({
         id,
@@ -44,6 +38,7 @@ const Favourites = () => {
         maxResult,
       }),
     );
+    dispatch(setIsEditModalOpen(true));
   };
 
   //   const searchFavRequest = (id, searchTerm, favRequest, sortByF, maxResult) => {
@@ -54,12 +49,13 @@ const Favourites = () => {
 
   return (
     <>
-      <Layout style={{ height: "100vh" }}>
+      <Layout
+        style={{ display: "flex", flexDirection: "column", height: "100vh" }}
+      >
         <MainHeader />
         <>
           <Content
             style={{
-              height: "100vh",
               paddingInline: "200px",
             }}
           >
@@ -76,6 +72,8 @@ const Favourites = () => {
             <div
               style={{
                 background: "#FFF",
+                flex: "1 1 auto",
+                overflow: "auto",
               }}
             >
               {favourites.length > 0 ? (

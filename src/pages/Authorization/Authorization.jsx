@@ -5,37 +5,34 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Flex, Form, Input, Layout } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import axios from "axios";
 
 const Authorization = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const onFinish = async () => {
-    try {
-      const result = await fetch(
-        "https://todo-redev.herokuapp.com/api/auth/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: email,
-            password: password,
-          }),
-        },
-      );
-      const data = await result.json();
-      if (!data.token) {
-        throw new Error(data.message);
-      } else {
-        localStorage.setItem("token", data.token);
-        navigate("/");
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const onFinish = () => {
+    axios({
+      method: "POST",
+      url: "https://todo-redev.herokuapp.com/api/auth/login",
+      data: {
+        email: email,
+        password: password,
+      },
+    })
+      .then((response) => {
+        if (!response.data.token) {
+          throw new Error(response.data.message);
+        } else {
+          localStorage.setItem("token", response.data.token);
+          navigate("/");
+        }
+      })
+      .catch(function (error) {
+        console.log(error.response.data);
+        alert(error.response.data.errors[0].msg);
+      });
   };
   return (
     <Layout className="layout">

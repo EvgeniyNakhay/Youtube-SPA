@@ -9,6 +9,7 @@ import {
   Slider,
   InputNumber,
 } from "antd";
+
 import { useDispatch, useSelector } from "react-redux";
 import { addToFavourites } from "../../redux/slices/favouritesSlice";
 

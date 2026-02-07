@@ -3,14 +3,8 @@
   width: 48px;
 }
 
-.container {
-  margin: 0 200px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .menu {
+  width: 100%;
   display: flex;
   align-items: center;
 }

@@ -13,6 +13,7 @@ const items = [
   { key: "/favourites", label: "Избранное" },
   { key: "/authorization", label: "Выйти" },
 ];
+
 const MainHeader = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const MainHeader = () => {
         <div className="menu">
           <img className="logo" src={logo} alt="logo" />
           <Menu
+            className="navigation-bar"
             theme="light"
             mode="horizontal"
             items={items}

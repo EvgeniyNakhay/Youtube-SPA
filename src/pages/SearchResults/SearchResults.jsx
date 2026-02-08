@@ -13,6 +13,7 @@ import VideoList from "../../components/VideosView/VideoList";
 import VideoCards from "../../components/VideosView/VideoCards";
 import { setIsModalOpen } from "../../redux/slices/isModalOpenSlice";
 import { setSearchTerm } from "../../redux/slices/searchTermSlice";
+import axios from "axios";
 // import { setRequestedVideos } from "../../redux/actions/requestedVideos";
 // import { fetchFromAPI } from "../../utils/fetchFromAPI";
 const { Content } = Layout;
@@ -67,21 +68,43 @@ const SearchResults = () => {
   const dataUrl = "https://jsonplaceholder.typicode.com/users";
   const imagesUrl = "https://dog.ceo/api/breeds/image/random";
 
-  const fetchData = () => {
-    fetch(dataUrl).then((response) =>
-      response.json().then((body) => setTitles(body)),
-    );
+  const getData = () => {
+    axios({
+      method: "GET",
+      url: dataUrl,
+    })
+      .then((response) => {
+        if (!response.data) {
+          throw new Error(response.error);
+        } else {
+          setTitles(response.data);
+        }
+      })
+      .catch(function (error) {
+        console.log(error.response.data);
+      });
   };
 
-  const fetchImages = () => {
-    fetch(imagesUrl).then((response) =>
-      response.json().then((body) => setImages(body)),
-    );
+  const getImages = () => {
+    axios({
+      method: "GET",
+      url: imagesUrl,
+    })
+      .then((response) => {
+        if (!response.data) {
+          throw new Error(response.data.message);
+        } else {
+          setImages(response.data);
+        }
+      })
+      .catch(function (response) {
+        console.log(response.data.message);
+      });
   };
 
   useEffect(() => {
-    fetchData();
-    fetchImages();
+    getData();
+    getImages();
   }, []);
 
   const showModal = () => {

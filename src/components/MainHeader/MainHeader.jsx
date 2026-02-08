@@ -39,7 +39,7 @@ const MainHeader = () => {
             mode="horizontal"
             items={items}
             onClick={handleNavigateTo}
-          />
+          ></Menu>
         </div>
       </div>
     </Header>

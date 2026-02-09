@@ -7,15 +7,16 @@ import "./style.css";
 import MainHeader from "../../components/MainHeader/MainHeader";
 import EditModalWind from "../../components/ModalWind/EditModalWind";
 import { removeFavourite } from "../../redux/slices/favouritesSlice";
-// import { useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { setIsEditModalOpen } from "../../redux/slices/isEditModalOpenSlice";
 import { activeFavourite } from "../../redux/slices/activeFavouriteSlice";
+import { setSearchTerm } from "../../redux/slices/searchTermSlice";
 // import { NavLink } from "react-router-dom";
 // import { setSearchTerm } from "../../redux/actions/searchTermAction";
 const { Content } = Layout;
 
 const Favourites = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   //   const [requests, setRequests] = useState(null);
@@ -39,6 +40,11 @@ const Favourites = () => {
       }),
     );
     dispatch(setIsEditModalOpen(true));
+  };
+
+  const onSearch = (searchTerm) => {
+    dispatch(setSearchTerm(searchTerm));
+    navigate("/searchResults");
   };
 
   //   const searchFavRequest = (id, searchTerm, favRequest, sortByF, maxResult) => {
@@ -94,6 +100,7 @@ const Favourites = () => {
                           color: "#000000",
                           padding: 0,
                         }}
+                        onClick={() => onSearch(item.searchTerm)}
                       >
                         {item.favouriteRequestName}
                       </button>

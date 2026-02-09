@@ -12,6 +12,7 @@ const { Search } = Input;
 const MainInput = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const searchTerm = useSelector((store) => store.searchTerm.value);
 
   const handleSearch = () => {

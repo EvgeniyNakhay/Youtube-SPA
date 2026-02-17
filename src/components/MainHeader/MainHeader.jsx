@@ -1,22 +1,24 @@
-import { NavLink, useNavigate } from "react-router";
+import { NavLink, useLocation, useNavigate } from "react-router";
 import logo from "./images/logo.svg";
 import "./style.css";
 
-import { Breadcrumb, Layout, Menu } from "antd";
+import { Breadcrumb, Flex, Layout, Menu } from "antd";
 import { setSearchTerm } from "../../redux/slices/searchTermSlice";
 import { useDispatch } from "react-redux";
 
 const { Header, Content, Footer } = Layout;
 
-const items = [
+const leftItems = [
   { key: "/", label: "Поиск" },
   { key: "/favourites", label: "Избранное" },
-  { key: "/authorization", label: "Выйти" },
 ];
+
+const rightItems = [{ key: "/authorization", label: "Выйти" }];
 
 const MainHeader = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const handleNavigateTo = (e) => {
     navigate(`${e.key}`);
@@ -24,24 +26,27 @@ const MainHeader = () => {
   };
 
   return (
-    <Header
-      style={{
-        background: "#FFF",
-        padding: "0",
-      }}
-    >
-      <div className="container">
-        <div className="menu">
-          <img className="logo" src={logo} alt="logo" />
+    <Header style={{ background: "#FFF", padding: "0 200px" }}>
+      <Flex justify="space-between" align="center" style={{ width: "100%" }}>
+        <Flex align="center" gap="large" style={{ flex: 1 }}>
+          <img className="logo" src={logo} alt="logo" style={{ width: 40 }} />
           <Menu
-            className="navigation-bar"
-            theme="light"
             mode="horizontal"
-            items={items}
+            items={leftItems}
             onClick={handleNavigateTo}
-          ></Menu>
-        </div>
-      </div>
+            style={{ borderBottom: "none", minWidth: 200 }}
+            selectedKeys={[location.pathname]}
+          />
+        </Flex>
+
+        <Menu
+          mode="horizontal"
+          items={rightItems}
+          onClick={handleNavigateTo}
+          style={{ borderBottom: "none" }}
+          selectedKeys={[location.pathname]}
+        />
+      </Flex>
     </Header>
   );
 };

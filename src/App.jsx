@@ -1,5 +1,7 @@
 import { Routes, Route } from "react-router";
 
+import "./style.css";
+
 import PrivateRoute from "./hoc/PrivateRoutes/PrivateRoute";
 import Authorization from "./pages/Authorization/Authorization";
 import Favourites from "./pages/Favourites/Favourites";
@@ -11,7 +13,7 @@ function App() {
     <>
       <Routes>
         <Route path="/authorization" element={<Authorization />} />
-        <Route element={<PrivateRoute />}>
+        <Route className="container" element={<PrivateRoute />}>
           <Route path="/" element={<MainPage />} />
           <Route path="/searchResults" element={<SearchResults />} />
           <Route path="/favourites" element={<Favourites />} />

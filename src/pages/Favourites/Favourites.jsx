@@ -79,6 +79,9 @@ const Favourites = () => {
                 background: "#FFF",
                 flex: "1 1 auto",
                 overflow: "auto",
+                display: "flex", // Added this
+                flexDirection: "column", // Added this
+                minHeight: "400px", // Ensures the white box has height when empty
               }}
             >
               {favourites.length > 0 ? (
@@ -129,7 +132,7 @@ const Favourites = () => {
                   );
                 })
               ) : (
-                <Empty />
+                <Empty description="У вас пока нет избранных запросов" />
               )}
             </div>
           </Content>

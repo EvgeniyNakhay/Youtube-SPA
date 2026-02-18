@@ -57,16 +57,11 @@ const ModalWind = () => {
       onOk={handleOk}
       onCancel={handleCancel}
       footer={[
-        <Button key="back" onClick={handleOk}>
-          Сохранить
-        </Button>,
-        <Button
-          key="submit"
-          type="primary"
-          // loading={loading}
-          onClick={handleCancel}
-        >
+        <Button key="back" onClick={handleCancel}>
           Не сохранять
+        </Button>,
+        <Button htmlType="submit" type="primary" onClick={handleOk}>
+          Сохранить
         </Button>,
       ]}
     >
@@ -81,14 +76,18 @@ const ModalWind = () => {
           <Form.Item label="Запрос">
             <Input placeholder={searchTerm} disabled />
           </Form.Item>
-          <Form.Item name="name" label="Название" rules={[{ required: true }]}>
+          <Form.Item
+            name="name"
+            label="Название"
+            rules={[{ required: true, message: "Укажите название!" }]}
+          >
             <Input
               placeholder="Укажите название"
-              rules={[{ required: true }]}
               onChange={(e) => setFavouritesInput(e.target.value)}
               value={favouritesInput}
             />
           </Form.Item>
+
           <Form.Item label="Сортировать по">
             <Select
               style={{ textAlign: "left" }}

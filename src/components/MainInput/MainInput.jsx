@@ -41,6 +41,7 @@ const MainInput = () => {
               value={searchTerm}
               size="large"
               onSearch={handleSearch}
+              style={{ marginTop: "30px" }}
             />
           </Content>
         </Col>

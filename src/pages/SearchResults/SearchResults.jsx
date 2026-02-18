@@ -1,4 +1,4 @@
-import { Layout, Input, Segmented, Button, Modal } from "antd";
+import { Layout, Input, Segmented, Button, Modal, Popover } from "antd";
 import {
   HeartOutlined,
   AppstoreOutlined,
@@ -14,6 +14,8 @@ import VideoCards from "../../components/VideosView/VideoCards";
 import { setIsModalOpen } from "../../redux/slices/isModalOpenSlice";
 import { setSearchTerm } from "../../redux/slices/searchTermSlice";
 import axios from "axios";
+import store from "../../redux/store";
+import { useNavigate } from "react-router";
 // import { setRequestedVideos } from "../../redux/actions/requestedVideos";
 // import { fetchFromAPI } from "../../utils/fetchFromAPI";
 const { Content } = Layout;
@@ -22,10 +24,12 @@ const { Search } = Input;
 const SearchResults = () => {
   const [list, setList] = useState(true);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   //   const { maxResult, sortByF } = useSelector((store) => store.activeFavRequest);
   //   const requestedVideos = useSelector((store) => store.requestedVideos);
 
   const searchTerm = useSelector((store) => store.searchTerm.value);
+  const favourites = useSelector((store) => store.favourites);
   const isModalOpen = useSelector((store) => store.isModalOpen.value);
 
   const [searchTermInput, setSearchTermInput] = useState(searchTerm);
@@ -115,12 +119,36 @@ const SearchResults = () => {
     dispatch(setSearchTerm(searchTermInput));
   };
 
-  const suffix = (
+  console.log(searchTerm);
+  console.log(favourites);
+
+  const isFavourite = favourites.some(
+    (item) => item.searchTerm === searchTermInput,
+  );
+
+  const suffix = isFavourite ? (
+    <Popover
+      placement="bottom"
+      title='Поиск сохранен в разделе "Избранное"'
+      content={
+        <a onClick={() => navigate("/favourites")}>Перейти в избранное</a>
+      }
+    >
+      <HeartFilled
+        style={{
+          fontSize: 16,
+          color: "#1890ff",
+          cursor: "pointer",
+        }}
+      />
+    </Popover>
+  ) : (
     <HeartOutlined
       onClick={showModal}
       style={{
         fontSize: 16,
         color: "#1890ff",
+        cursor: "pointer",
       }}
     />
   );

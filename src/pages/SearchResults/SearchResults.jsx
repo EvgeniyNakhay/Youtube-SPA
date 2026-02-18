@@ -139,7 +139,7 @@ const SearchResults = () => {
             <h1
               style={{
                 fontSize: "28px",
-                marginTop: "40px",
+                margin: "40px 0 20px",
               }}
             >
               Поиск видео
@@ -156,7 +156,7 @@ const SearchResults = () => {
           </Content>
           <Content
             style={{
-              marginTop: "40px",
+              marginTop: "30px",
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
@@ -174,12 +174,13 @@ const SearchResults = () => {
               <span
                 style={{
                   fontWeight: "bold",
-                  marginLeft: "5px",
+                  marginInline: "10px",
                   marginBottom: 0,
                 }}
               >
                 "{searchTerm}"
               </span>
+              <span>786000</span>
             </p>
             <Segmented
               onChange={() => setList(!list)}

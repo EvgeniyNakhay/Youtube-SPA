@@ -1,4 +1,4 @@
-* {
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -55,4 +55,90 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+} */
+
+/* Container for the entire list */
+.video-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px 0;
+  /* max-width: 1000px; */
+}
+
+/* Individual Video Row */
+.video-list {
+  display: flex;
+  gap: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.video-list:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Thumbnail Styling */
+.thumbnail-list {
+  width: 240px; /* Fixed width for list view */
+  height: 135px; /* 16:9 Aspect Ratio */
+  object-fit: cover;
+  border-radius: 12px;
+  flex-shrink: 0; /* Prevents image from squishing */
+}
+
+/* Content Area (Title, Channel, Stats) */
+.content-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+.title-list {
+  font-size: 18px;
+  font-weight: 600;
+  color: #0f0f0f;
+  text-decoration: none;
+  margin-bottom: 4px;
+  /* Multi-line ellipsis (hides text after 2 lines) */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.title-list:hover {
+  color: #065fd4;
+}
+
+.channel-name-list,
+.view-count-list {
+  font-size: 14px;
+  color: #606060;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.channel-name-list {
+  margin-top: 8px;
+}
+
+/* Responsive adjustments for Mobile */
+@media (max-width: 600px) {
+  .video-list {
+    flex-direction: column; /* Stack image on top of text on small screens */
+  }
+
+  .thumbnail-list {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  .title-list {
+    font-size: 16px;
+  }
 }

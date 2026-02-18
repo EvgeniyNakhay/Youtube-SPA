@@ -3,52 +3,94 @@
   padding: 0;
   box-sizing: border-box;
 }
-*:focus {
-  outline: none;
+
+/* Use a background color for the app to make the white cards pop */
+body {
+  background-color: #f9f9f9;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 .video-container {
-  width: calc(100% - 60px);
+  /* Use 1fr instead of 25% so the gap is factored in automatically */
   display: grid;
-  grid-template-columns: repeat(4, 25%);
-  grid-gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 24px 16px; /* Vertical gap, Horizontal gap */
+  width: 100%;
+  padding: 24px;
 }
+
 .video {
-  min-height: 250px;
-  height: auto;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
 }
+
+/* Subtly lift the card when hovering */
+.video:hover {
+  transform: translateY(-4px);
+}
+
 .thumbnail {
   width: 100%;
-  height: 138px;
+  aspect-ratio: 16 / 9; /* Maintains perfect YouTube ratio */
   object-fit: cover;
-  margin: 0px 0px 8px;
+  border-radius: 12px; /* Softened corners */
+  margin-bottom: 12px;
+  background-color: #e5e5e5;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.content-list {
+  padding: 0 4px;
 }
 
 .title {
-  font-size: 14px;
-  line-height: 16px;
-  height: 32px;
-  margin: 0px 0px 8px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 15px;
+  line-height: 20px;
+  max-height: 40px; /* Allowance for 2 lines */
+  margin-bottom: 6px;
   font-weight: 600;
-  color: black;
+  color: #0f0f0f;
+  text-decoration: none;
+
+  /* Proper multi-line ellipsis */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
+
 .channel-name {
-  font-size: 14px;
-  line-height: 16px;
-  margin: 8px 0px 0px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: rgba(23, 23, 25, 0.3);
+  font-size: 13px;
+  line-height: 18px;
+  color: #606060; /* Darker grey for better readability */
+  margin-bottom: 2px;
+  display: block;
 }
+
 .view-count {
-  font-size: 14px;
-  line-height: 16px;
-  color: rgba(23, 23, 25, 0.3);
-  margin: 0px 0px 8px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 13px;
+  line-height: 18px;
+  color: #606060;
+}
+
+/* Hover state for the title to mimic links */
+.title:hover {
+  color: #065fd4;
+}
+
+/* Responsive: 4 -> 2 -> 1 columns */
+@media (max-width: 1100px) {
+  .video-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .video-container {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
 }

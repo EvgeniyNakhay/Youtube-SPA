@@ -1,69 +1,9 @@
-/* * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-*:focus {
-  outline: none;
-}
-
-.video-list-container {
-  width: calc(100% - 353px);
-  display: block;
-}
-.video-list {
-  display: flex;
-  min-height: 88px;
-  height: auto;
-}
-.thumbnail-list {
-  width: 157px;
-  height: 88px;
-  object-fit: cover;
-  margin-bottom: 32px;
-}
-
-.content-list {
-  margin-left: 20px;
-  width: 100%;
-}
-
-.title-list {
-  font-size: 14px;
-  line-height: 16px;
-  max-height: 40px;
-  margin: 0px 0px 8px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-weight: 600;
-  color: black;
-}
-.channel-name-list {
-  font-size: 14px;
-  line-height: 16px;
-  margin: 0px;
-  padding: 5px 0px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: rgba(23, 23, 25, 0.3);
-}
-.view-count-list {
-  font-size: 14px;
-  line-height: 16px;
-  color: rgba(23, 23, 25, 0.3);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-} */
-
 /* Container for the entire list */
 .video-list-container {
   display: flex;
   flex-direction: column;
   gap: 16px;
   padding: 20px 0;
-  /* max-width: 1000px; */
 }
 
 /* Individual Video Row */

@@ -33,15 +33,7 @@ const MainInput = () => {
               verticalAlign: "middle",
             }}
           >
-            <h1
-              style={{
-                fontSize: "36px",
-                paddingBottom: "40px",
-                marginBottom: 0,
-              }}
-            >
-              Поиск видео
-            </h1>
+            <h1>Поиск видео</h1>
             <Search
               placeholder="Что хотите посмотреть?"
               enterButton="Найти"

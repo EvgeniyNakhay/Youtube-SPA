@@ -62,14 +62,13 @@ const Favourites = () => {
         <>
           <Content
             style={{
-              paddingInline: "200px",
+              marginInline: "200px",
             }}
           >
-            <Content>
+            <Content style={{ margin: "40px 0" }}>
               <h1
                 style={{
                   fontSize: "36px",
-                  marginTop: "40px",
                 }}
               >
                 Избранное
@@ -89,21 +88,21 @@ const Favourites = () => {
                       key={item.id}
                       style={{
                         marginBlock: "10px",
+                        padding: "0 20px",
                         display: "flex",
                         justifyContent: "space-between",
                       }}
                     >
-                      <button
+                      <Button
                         type="text"
                         style={{
                           fontWeight: 500,
                           color: "#000000",
-                          padding: 0,
                         }}
                         onClick={() => onSearch(item.searchTerm)}
                       >
                         {item.favouriteRequestName}
-                      </button>
+                      </Button>
                       <div>
                         <Button
                           onClick={() =>

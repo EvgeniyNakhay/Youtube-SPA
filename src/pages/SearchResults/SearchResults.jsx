@@ -1,4 +1,4 @@
-import { Layout, Input, Segmented, Button, Modal, Popover } from "antd";
+import { Layout, Input, Segmented, Button, Modal, Popover, Spin } from "antd";
 import {
   HeartOutlined,
   AppstoreOutlined,
@@ -6,21 +6,19 @@ import {
   HeartFilled,
 } from "@ant-design/icons";
 import MainHeader from "../../components/MainHeader/MainHeader";
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import ModalWind from "../../components/ModalWind/ModalWind";
 import { useDispatch, useSelector } from "react-redux";
-import VideoList from "../../components/VideosView/VideoList";
-import VideoCards from "../../components/VideosView/VideoCards";
+const VideoList = lazy(() => import("../../components/VideosView/VideoList"));
+const VideoCards = lazy(() => import("../../components/VideosView/VideoCards"));
 import { setIsModalOpen } from "../../redux/slices/isModalOpenSlice";
 import { setSearchTerm } from "../../redux/slices/searchTermSlice";
 import axios from "axios";
-import store from "../../redux/store";
 import { useNavigate } from "react-router";
 // import { setRequestedVideos } from "../../redux/actions/requestedVideos";
 // import { fetchFromAPI } from "../../utils/fetchFromAPI";
 const { Content } = Layout;
 const { Search } = Input;
-
 const SearchResults = () => {
   const [list, setList] = useState(true);
   const dispatch = useDispatch();
@@ -118,9 +116,6 @@ const SearchResults = () => {
   const handleSearch = () => {
     dispatch(setSearchTerm(searchTermInput));
   };
-
-  console.log(searchTerm);
-  console.log(favourites);
 
   const isFavourite = favourites.some(
     (item) => item.searchTerm === searchTermInput,
@@ -224,10 +219,16 @@ const SearchResults = () => {
               ]}
             />
           </Content>
-          {list ? (
-            <VideoList titles={titles} images={images} />
+          {titles.length > 0 ? (
+            list ? (
+              <VideoList titles={titles} images={images} />
+            ) : (
+              <VideoCards titles={titles} images={images} />
+            )
           ) : (
-            <VideoCards titles={titles} images={images} />
+            <div style={{ textAlign: "center", marginTop: "50px" }}>
+              <Spin tip="Fetching data..." />
+            </div>
           )}
         </Content>
       </Layout>

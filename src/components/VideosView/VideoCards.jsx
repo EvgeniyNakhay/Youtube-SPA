@@ -22,7 +22,8 @@ const VideoCards = ({ titles, images }) => {
               className="title"
             >
               {/* {item.snippet?.title.slice(0, 60)} */}
-              {item.title}
+              "Как кормить кошку натуралкой"
+              {/* {item.title} */}
             </a>
             {/* <p className="channel-name">{item.snippet?.channelTitle}</p> */}
             <p className="channel-name-list">{item.name}</p>

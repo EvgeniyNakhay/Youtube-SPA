@@ -65,7 +65,11 @@ const Favourites = () => {
               marginInline: "200px",
             }}
           >
-            <Content style={{ margin: "40px 0" }}>
+            <Content
+              style={{
+                margin: "40px 0",
+              }}
+            >
               <h1
                 style={{
                   fontSize: "36px",
@@ -81,7 +85,6 @@ const Favourites = () => {
                 overflow: "auto",
                 display: "flex", // Added this
                 flexDirection: "column", // Added this
-                minHeight: "400px", // Ensures the white box has height when empty
               }}
             >
               {favourites.length > 0 ? (

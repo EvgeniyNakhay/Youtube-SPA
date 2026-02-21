@@ -135,7 +135,17 @@ const Favourites = () => {
                   );
                 })
               ) : (
-                <Empty description="У вас пока нет избранных запросов" />
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    minHeight: "400px",
+                    background: "#f5f5f5",
+                  }}
+                >
+                  <Empty description="У вас пока нет избранных запросов" />
+                </div>
               )}
             </div>
           </Content>

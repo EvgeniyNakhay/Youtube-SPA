@@ -8,7 +8,7 @@ const getData = createAsyncThunk(
   async (arg, thunkAPI) => {
     axios({
       method: "GET",
-      url: dataUrl,
+      url: "https://jsonplaceholder.typicode.com/users",
     })
       .then((response) => {
         if (!response.data) {

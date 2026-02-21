@@ -203,7 +203,7 @@ const SearchResults = () => {
               >
                 "{searchTerm}"
               </span>
-              <span>786000</span>
+              <span style={{ font: "#1717194D", opacity: "30%" }}>786000</span>
             </p>
             <Segmented
               onChange={() => setList(!list)}

@@ -36,11 +36,16 @@ const ModalWind = () => {
     setMaxResult(newValue);
   };
 
-  const handleOk = () => {
+  const onFinish = (values) => {
     //     dispatch(setFavRequest(favRequestInput));
     //     dispatch(addToFavourites(searchTerm, favRequestInput, sortByF, maxResult));
     dispatch(
-      addToFavourites({ searchTerm, favouritesInput, sortByF, maxResult }),
+      addToFavourites({
+        searchTerm,
+        favouritesInput: values.name,
+        sortByF,
+        maxResult,
+      }),
     );
     dispatch(setIsModalOpen(false));
   };
@@ -54,13 +59,12 @@ const ModalWind = () => {
       title="Сохранить запрос"
       centered
       open={isModalOpen}
-      onOk={handleOk}
       onCancel={handleCancel}
       footer={[
         <Button key="back" onClick={handleCancel}>
           Не сохранять
         </Button>,
-        <Button htmlType="submit" type="primary" onClick={handleOk}>
+        <Button htmlType="submit" type="primary" onClick={() => form.submit()}>
           Сохранить
         </Button>,
       ]}
@@ -69,8 +73,10 @@ const ModalWind = () => {
         <Form
           layout="vertical"
           form={form}
+          onFinish={onFinish}
           initialValues={{
-            layout: "vertical",
+            name: favouritesInput,
+            sortBy: "unsorted",
           }}
         >
           <Form.Item label="Запрос">

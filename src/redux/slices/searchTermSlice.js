@@ -1,6 +1,27 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = { value: "" };
+
+const getData = createAsyncThunk(
+  "searchTerm/getData",
+  async (arg, thunkAPI) => {
+    axios({
+      method: "GET",
+      url: dataUrl,
+    })
+      .then((response) => {
+        if (!response.data) {
+          throw new Error(response.error);
+        } else {
+          setTitles(response.data);
+        }
+      })
+      .catch(function (error) {
+        console.log(error.response.data);
+      });
+  },
+);
 
 const searchTermSlice = createSlice({
   name: "searchTerm",

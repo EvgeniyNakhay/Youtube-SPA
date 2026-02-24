@@ -3,7 +3,7 @@ import axios from "axios";
 
 const initialState = { value: "" };
 
-const getData = createAsyncThunk(
+export const getData = createAsyncThunk(
   "searchTerm/getData",
   async (arg, thunkAPI) => {
     axios({
@@ -14,7 +14,8 @@ const getData = createAsyncThunk(
         if (!response.data) {
           throw new Error(response.error);
         } else {
-          setTitles(response.data);
+          console.log(arg, thunkAPI);
+          return response.data;
         }
       })
       .catch(function (error) {
@@ -33,6 +34,20 @@ const searchTermSlice = createSlice({
     clearInput(state) {
       state.value = "";
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getData.pending, (state, action) => {
+        console.log(state);
+        console.log(action.payload);
+      })
+      .addCase(getData.fulfilled, (state, action) => {
+        state.searchTerm = action.payload;
+      })
+      .addCase(getData.rejected, (state, action) => {
+        console.log(state);
+        console.log(action.payload);
+      });
   },
 });
 

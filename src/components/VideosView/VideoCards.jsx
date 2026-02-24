@@ -4,30 +4,26 @@ import React from "react";
 import "./VideoCards.css";
 const { Meta } = Card;
 
-const VideoCards = ({ titles, images }) => {
+const VideoCards = ({ data }) => {
   // const requestedVideos = useSelector((store) => store.requestedVideos);
   return (
     <div className="video-container">
-      {titles.map((item) => (
+      {data.map((item) => (
         <div className="video">
           <img
-            // src={item.snippet?.thumbnails?.high?.url}
-            src={images.message}
+            src={item.snippet?.thumbnails?.high?.url}
             className="thumbnail"
-            // alt={item.snippet?.title}
+            alt={item.snippet?.title}
           />
           <div className="content">
             <a
-              // href={`https://www.youtube.com/results?search_query=${item.snippet?.title}`}
+              href={`https://www.youtube.com/results?search_query=${item.snippet?.title}`}
               className="title"
             >
               {/* {item.snippet?.title.slice(0, 60)} */}
-              "Как кормить кошку натуралкой"
-              {/* {item.title} */}
+              {item.snippet?.title.slice(0, 60)}
             </a>
-            {/* <p className="channel-name">{item.snippet?.channelTitle}</p> */}
-            <p className="channel-name-list">{item.name}</p>
-
+            <p className="channel-name">{item.snippet?.channelTitle}</p>
             <p className="view-count">786 тыс. просмотров</p>
           </div>
         </div>

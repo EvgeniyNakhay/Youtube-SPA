@@ -31,8 +31,7 @@ const SearchResults = () => {
   const isModalOpen = useSelector((store) => store.isModalOpen.value);
 
   const [searchTermInput, setSearchTermInput] = useState(searchTerm);
-  const [titles, setTitles] = useState([]);
-  const [images, setImages] = useState([]);
+  const [data, setData] = useState([]);
 
   //   const api_key = "AIzaSyDuSa_snfrqupxMfqRmOU_NaH7utQtq988";
   //   const video_http = "https://www.googleapis.com/youtube/v3/videos";
@@ -66,9 +65,8 @@ const SearchResults = () => {
   //         dispatch(setRequestedVideos(data.items));
   //       });
   //   }, [searchTerm]);
-
-  const dataUrl = "https://jsonplaceholder.typicode.com/users";
-  const imagesUrl = "https://dog.ceo/api/breeds/image/random";
+  const API_KEY = "AIzaSyDN4wwHWdszYu3_DlBkzM4NfP3ZHEESOAQ";
+  const dataUrl = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${searchTerm}&key=${API_KEY}`;
 
   const getData = () => {
     axios({
@@ -79,34 +77,17 @@ const SearchResults = () => {
         if (!response.data) {
           throw new Error(response.error);
         } else {
-          setTitles(response.data);
+          setData(response.data.items);
+          console.log(response.data.items);
         }
       })
       .catch(function (error) {
-        console.log(error.response.data);
-      });
-  };
-
-  const getImages = () => {
-    axios({
-      method: "GET",
-      url: imagesUrl,
-    })
-      .then((response) => {
-        if (!response.data) {
-          throw new Error(response.data.message);
-        } else {
-          setImages(response.data);
-        }
-      })
-      .catch(function (response) {
-        console.log(response.data.message);
+        console.log(error.response.data.error.message);
       });
   };
 
   useEffect(() => {
     getData();
-    getImages();
   }, []);
 
   const showModal = () => {
@@ -219,11 +200,11 @@ const SearchResults = () => {
               ]}
             />
           </Content>
-          {titles.length > 0 ? (
+          {data.length > 0 ? (
             list ? (
-              <VideoList titles={titles} images={images} />
+              <VideoList data={data} />
             ) : (
-              <VideoCards titles={titles} images={images} />
+              <VideoCards data={data} />
             )
           ) : (
             <div style={{ textAlign: "center", marginTop: "50px" }}>

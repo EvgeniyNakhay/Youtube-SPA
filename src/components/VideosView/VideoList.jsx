@@ -3,12 +3,11 @@ import "./VideoList.css";
 
 const VideoList = ({ data }) => {
   // const requestedVideos = useSelector((store) => store.requestedVideos);
-
   return (
     <div className="video-list-container">
       {data &&
         data.map((item) => (
-          <div className="video-list" key={item.id.videoId}>
+          <div className="video-list" key={item.etag}>
             <img
               src={item.snippet?.thumbnails?.high?.url}
               className="thumbnail-list"
@@ -19,7 +18,6 @@ const VideoList = ({ data }) => {
                 href={`https://www.youtube.com/results?search_query=${item.snippet?.title}`}
                 className="title-list"
               >
-                {/* {item.snippet?.title.slice(0, 60)} */}
                 {item.snippet?.title}
               </a>
               <p className="channel-name-list">{item.snippet?.channelTitle}</p>

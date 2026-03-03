@@ -1,6 +1,30 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = [];
+
+const API_KEY = import.meta.env.VITE_API_KEY;
+// const dataUrl = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=12&order=relevance&q=${searchTerm}&key=${API_KEY}`;
+
+// export const getData = createAsyncThunk(
+//   "favourites/getData",
+//   async (arg, thunkAPI) => {
+//     axios({
+//       method: "GET",
+//       url: dataUrl,
+//     })
+//       .then((response) => {
+//         if (!response.data) {
+//           throw new Error(response.error);
+//         } else {
+//           setData(response.data.items);
+//         }
+//       })
+//       .catch(function (error) {
+//         console.log(error.response.data.error.message);
+//       });
+//   },
+// );
 
 const favouritesSlice = createSlice({
   name: "favourites",

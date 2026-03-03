@@ -5,6 +5,8 @@ import {
   BarsOutlined,
   HeartFilled,
 } from "@ant-design/icons";
+import axios from "axios";
+
 import MainHeader from "../../components/MainHeader/MainHeader";
 import { lazy, useEffect, useState } from "react";
 import ModalWind from "../../components/ModalWind/ModalWind";
@@ -13,60 +15,24 @@ const VideoList = lazy(() => import("../../components/VideosView/VideoList"));
 const VideoCards = lazy(() => import("../../components/VideosView/VideoCards"));
 import { setIsModalOpen } from "../../redux/slices/isModalOpenSlice";
 import { setSearchTerm } from "../../redux/slices/searchTermSlice";
-import axios from "axios";
 import { useNavigate } from "react-router";
-// import { setRequestedVideos } from "../../redux/actions/requestedVideos";
-// import { fetchFromAPI } from "../../utils/fetchFromAPI";
 const { Content } = Layout;
 const { Search } = Input;
+
 const SearchResults = () => {
   const [list, setList] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  //   const { maxResult, sortByF } = useSelector((store) => store.activeFavRequest);
-  //   const requestedVideos = useSelector((store) => store.requestedVideos);
 
   const searchTerm = useSelector((store) => store.searchTerm.value);
   const favourites = useSelector((store) => store.favourites);
   const isModalOpen = useSelector((store) => store.isModalOpen.value);
 
   const [searchTermInput, setSearchTermInput] = useState(searchTerm);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
 
-  //   const api_key = "AIzaSyDuSa_snfrqupxMfqRmOU_NaH7utQtq988";
-  //   const video_http = "https://www.googleapis.com/youtube/v3/videos";
-
-  // const fakeDataUrl =
-  // // 'https://randomuser.me/api/?results=20&inc=name,gender,email,nat,picture&noinfo';
-  // // `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${searchTerm}&type=video&key=AIzaSyDuSa_snfrqupxMfqRmOU_NaH7utQtq988`;
-  //    `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${searchTermInput}&type=video&maxResults=12&key=${api_key}`
-
-  // const appendData = () => {
-  //   fetch(fakeDataUrl)
-  //     .then((res) => res.json())
-  //     .then((body) => {
-  //       // dispatch(setRequestedVideos(requestedVideos.concat(body.results)));
-  //       console.log(requestedVideos);
-  //     });
-  // };
-
-  // useEffect(() => {
-  //   appendData();
-  // }, [requestedVideos]);
-
-  //   useEffect(() => {
-  //     console.log(maxResult);
-  //     console.log(sortByF);
-  //     fetchFromAPI(
-  //       `search?part=snippet&q=${searchTerm}&type=video&key=${api_key}`
-  //     )
-  //       // fetchFromAPI(`search?part=snippet&order=${sortByF}&maxResults=${searchTerm}&q=${searchTerm}&type=video&key=${api_key}`)
-  //       .then((data) => {
-  //         dispatch(setRequestedVideos(data.items));
-  //       });
-  //   }, [searchTerm]);
-  const API_KEY = "AIzaSyDN4wwHWdszYu3_DlBkzM4NfP3ZHEESOAQ";
-  const dataUrl = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${searchTerm}&key=${API_KEY}`;
+  const API_KEY = import.meta.env.VITE_API_KEY;
+  const dataUrl = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=12&order=relevance&q=${searchTerm}&key=${API_KEY}`;
 
   const getData = () => {
     axios({
@@ -77,8 +43,8 @@ const SearchResults = () => {
         if (!response.data) {
           throw new Error(response.error);
         } else {
-          setData(response.data.items);
-          console.log(response.data.items);
+          setData(response.data);
+          console.log(response.data);
         }
       })
       .catch(function (error) {
@@ -96,6 +62,7 @@ const SearchResults = () => {
 
   const handleSearch = () => {
     dispatch(setSearchTerm(searchTermInput));
+    getData();
   };
 
   const isFavourite = favourites.some(
@@ -184,7 +151,9 @@ const SearchResults = () => {
               >
                 "{searchTerm}"
               </span>
-              <span style={{ font: "#1717194D", opacity: "30%" }}>786000</span>
+              <span style={{ font: "#1717194D", opacity: "30%" }}>
+                {data.pageInfo.totalResults}
+              </span>
             </p>
             <Segmented
               onChange={() => setList(!list)}
@@ -200,11 +169,11 @@ const SearchResults = () => {
               ]}
             />
           </Content>
-          {data.length > 0 ? (
+          {data.items.length > 0 ? (
             list ? (
-              <VideoList data={data} />
+              <VideoList data={data.items} />
             ) : (
-              <VideoCards data={data} />
+              <VideoCards data={data.items} />
             )
           ) : (
             <div style={{ textAlign: "center", marginTop: "50px" }}>

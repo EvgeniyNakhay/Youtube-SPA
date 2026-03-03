@@ -52,7 +52,6 @@ const Favourites = () => {
   //     dispatch(setSearchTerm(searchTerm));
   //     navigate(`/search/${searchTerm}`);
   //   };
-
   return (
     <>
       <Layout

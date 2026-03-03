@@ -15,7 +15,6 @@ import { addToFavourites } from "../../redux/slices/favouritesSlice";
 
 import { useState } from "react";
 import { setIsModalOpen } from "../../redux/slices/isModalOpenSlice";
-// import { setFavRequest } from "../../redux/actions/favRequest";
 
 const ModalWind = () => {
   const [form] = Form.useForm();
@@ -37,8 +36,6 @@ const ModalWind = () => {
   };
 
   const onFinish = (values) => {
-    //     dispatch(setFavRequest(favRequestInput));
-    //     dispatch(addToFavourites(searchTerm, favRequestInput, sortByF, maxResult));
     dispatch(
       addToFavourites({
         searchTerm,

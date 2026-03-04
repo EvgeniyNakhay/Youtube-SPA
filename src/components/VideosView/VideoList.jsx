@@ -1,8 +1,6 @@
 import "./VideoList.css";
-// import { useSelector } from "react-redux";
 
 const VideoList = ({ data }) => {
-  // const requestedVideos = useSelector((store) => store.requestedVideos);
   return (
     <div className="video-list-container">
       {data &&
@@ -21,7 +19,9 @@ const VideoList = ({ data }) => {
                 {item.snippet?.title}
               </a>
               <p className="channel-name-list">{item.snippet?.channelTitle}</p>
-              <p className="view-count-list">786 тыс. просмотров</p>
+              <p className="view-count">
+                {item.statistics?.viewCount} просмотров
+              </p>
             </div>
           </div>
         ))}

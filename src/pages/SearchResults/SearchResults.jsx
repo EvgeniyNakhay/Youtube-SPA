@@ -30,26 +30,40 @@ const SearchResults = () => {
 
   const [searchTermInput, setSearchTermInput] = useState(searchTerm);
   const [data, setData] = useState({});
+  const [totalResults, setTotalResults] = useState(0);
 
   const API_KEY = import.meta.env.VITE_API_KEY;
   const dataUrl = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=12&order=relevance&q=${searchTerm}&key=${API_KEY}`;
 
-  const getData = () => {
-    axios({
-      method: "GET",
-      url: dataUrl,
-    })
-      .then((response) => {
-        if (!response.data) {
-          throw new Error(response.error);
-        } else {
-          setData(response.data);
-          console.log(response.data);
-        }
-      })
-      .catch(function (error) {
-        console.log(error.response.data.error.message);
-      });
+  const getData = async () => {
+    try {
+      const searchResponse = await axios.get(dataUrl);
+      const searchItems = searchResponse.data.items;
+
+      setTotalResults(searchResponse.data.pageInfo.totalResults);
+      setData(searchItems);
+
+      const videoIds = searchItems.map((item) => item.id.videoId).join(",");
+      if (videoIds) {
+        const statsResponse = await axios.get(
+          `https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${videoIds}&key=${API_KEY}`,
+        );
+        const statsItems = statsResponse.data.items;
+        const mergedData = searchItems.map((item) => {
+          const stats = statsItems.find((i) => i.id === item.id.videoId);
+          return {
+            ...item,
+            statistics: stats ? stats.statistics : null,
+          };
+        });
+        setData(mergedData);
+        console.log(mergedData);
+      } else {
+        setData([]);
+      }
+    } catch (error) {
+      console.error("Ошибка при получении данных:", error);
+    }
   };
 
   useEffect(() => {
@@ -152,7 +166,7 @@ const SearchResults = () => {
                 "{searchTerm}"
               </span>
               <span style={{ font: "#1717194D", opacity: "30%" }}>
-                {data.pageInfo.totalResults}
+                {totalResults}
               </span>
             </p>
             <Segmented
@@ -169,11 +183,11 @@ const SearchResults = () => {
               ]}
             />
           </Content>
-          {data.items.length > 0 ? (
+          {data.length > 0 ? (
             list ? (
-              <VideoList data={data.items} />
+              <VideoList data={data} />
             ) : (
-              <VideoCards data={data.items} />
+              <VideoCards data={data} />
             )
           ) : (
             <div style={{ textAlign: "center", marginTop: "50px" }}>

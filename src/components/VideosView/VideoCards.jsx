@@ -24,7 +24,7 @@ const VideoCards = ({ data }) => {
               {item.snippet?.title.slice(0, 60)}
             </a>
             <p className="channel-name">{item.snippet?.channelTitle}</p>
-            <p className="view-count">786 тыс. просмотров</p>
+            <p className="view-count">{item.statistics.viewCount}</p>
           </div>
         </div>
       ))}

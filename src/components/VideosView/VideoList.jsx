@@ -1,5 +1,18 @@
 import "./VideoList.css";
 
+const formatViews = (viewsCount) => {
+  if (!viewsCount) return "0 просмотров";
+
+  const views = parseInt(viewsCount);
+
+  if (views >= 1000000) {
+    return (views / 1000000).toFixed(1) + " млн. просмотров";
+  } else if (views >= 1000) {
+    return Math.floor(views / 1000) + " тыс. просмотров";
+  }
+  return views + "просмотров";
+};
+
 const VideoList = ({ data }) => {
   return (
     <div className="video-list-container">
@@ -20,7 +33,7 @@ const VideoList = ({ data }) => {
               </a>
               <p className="channel-name-list">{item.snippet?.channelTitle}</p>
               <p className="view-count">
-                {item.statistics?.viewCount} просмотров
+                {formatViews(item.statistics?.viewCount)}
               </p>
             </div>
           </div>

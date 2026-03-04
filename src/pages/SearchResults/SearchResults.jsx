@@ -66,9 +66,7 @@ const SearchResults = () => {
     }
   };
 
-  useEffect(() => {
-    getData();
-  }, []);
+  useEffect(() => getData(), []);
 
   const showModal = () => {
     dispatch(setIsModalOpen(true));

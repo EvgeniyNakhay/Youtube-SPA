@@ -33,6 +33,7 @@ const SearchResults = () => {
   const [totalResults, setTotalResults] = useState(0);
 
   const API_KEY = import.meta.env.VITE_API_KEY;
+
   const dataUrl = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=12&order=relevance&q=${searchTerm}&key=${API_KEY}`;
 
   const getData = async () => {
@@ -57,7 +58,6 @@ const SearchResults = () => {
           };
         });
         setData(mergedData);
-        console.log(mergedData);
       } else {
         setData([]);
       }
@@ -66,7 +66,9 @@ const SearchResults = () => {
     }
   };
 
-  useEffect(() => getData(), []);
+  useEffect(() => {
+    getData();
+  }, []);
 
   const showModal = () => {
     dispatch(setIsModalOpen(true));
@@ -134,7 +136,7 @@ const SearchResults = () => {
               suffix={suffix}
               value={searchTermInput}
               onChange={(e) => setSearchTermInput(e.target.value)}
-              onSearch={handleSearch}
+              onSearch={() => handleSearch()}
             />
           </Content>
           <Content

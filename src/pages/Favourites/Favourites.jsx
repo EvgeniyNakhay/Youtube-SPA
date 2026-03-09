@@ -2,7 +2,6 @@ import { Layout, Button, Empty } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 
-// import React, { useEffect, useState } from "react";
 import "./style.css";
 import MainHeader from "../../components/MainHeader/MainHeader";
 import EditModalWind from "../../components/ModalWind/EditModalWind";
@@ -11,15 +10,12 @@ import { useNavigate } from "react-router";
 import { setIsEditModalOpen } from "../../redux/slices/isEditModalOpenSlice";
 import { activeFavourite } from "../../redux/slices/activeFavouriteSlice";
 import { setSearchTerm } from "../../redux/slices/searchTermSlice";
-// import { NavLink } from "react-router-dom";
-// import { setSearchTerm } from "../../redux/actions/searchTermAction";
 const { Content } = Layout;
 
 const Favourites = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  //   const [requests, setRequests] = useState(null);
   const favourites = useSelector((store) => store.favourites);
   const isEditModalOpen = useSelector((store) => store.isEditModalOpen.value);
 
@@ -47,11 +43,6 @@ const Favourites = () => {
     navigate("/searchResults");
   };
 
-  //   const searchFavRequest = (id, searchTerm, favRequest, sortByF, maxResult) => {
-  //     dispatch(activeFavRequest(id, searchTerm, favRequest, sortByF, maxResult));
-  //     dispatch(setSearchTerm(searchTerm));
-  //     navigate(`/search/${searchTerm}`);
-  //   };
   return (
     <>
       <Layout
@@ -82,8 +73,8 @@ const Favourites = () => {
                 background: "#FFF",
                 flex: "1 1 auto",
                 overflow: "auto",
-                display: "flex", // Added this
-                flexDirection: "column", // Added this
+                display: "flex",
+                flexDirection: "column",
               }}
             >
               {favourites.length > 0 ? (

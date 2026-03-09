@@ -6,11 +6,11 @@ const formatViews = (viewsCount) => {
   const views = parseInt(viewsCount);
 
   if (views >= 1000000) {
-    return (views / 1000000).toFixed(1) + " млн. просмотров";
+    return Math.floor(views / 1000000) + " млн. просмотров";
   } else if (views >= 1000) {
     return Math.floor(views / 1000) + " тыс. просмотров";
   }
-  return views + "просмотров";
+  return views + " просмотров";
 };
 
 const VideoList = ({ data }) => {

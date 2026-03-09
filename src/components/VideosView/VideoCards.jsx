@@ -12,7 +12,7 @@ const formatViews = (viewsCount) => {
   } else if (views >= 1000) {
     return Math.floor(views / 10000) + " тыс. просмотров";
   }
-  return views + "просмотров";
+  return views + " просмотров";
 };
 
 const VideoCards = ({ data }) => {
